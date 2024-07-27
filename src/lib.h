@@ -108,6 +108,17 @@
 		fprintf( stderr, "\t%s file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );                       \
 	}
 
+#define NANO_ASSERT_NOTEQ_PTR( TESTNAME, obj1, obj2 )                                                                  \
+	if ( obj1 == obj2 )                                                                                            \
+	{                                                                                                              \
+		fprintf( stderr, "\t%s file: %s line: %d Error: %p Not expected to be equal to %p .\n", TESTNAME,      \
+			 __FILE__, __LINE__, obj1, obj2 );                                                             \
+	}                                                                                                              \
+	else                                                                                                           \
+	{                                                                                                              \
+		fprintf( stderr, "\t%s file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );                       \
+	}
+
 #define NANO_ASSERT_EQ_BOOL( TESTNAME, obj1, obj2 )                                                                    \
 	if ( obj1 != obj2 )                                                                                            \
 	{                                                                                                              \
