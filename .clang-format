@@ -1,0 +1,27 @@
+Language: Cpp
+BasedOnStyle: LLVM
+IndentWidth: 8
+UseTab: Always
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: false
+IndentCaseLabels: false
+
+ReflowComments: false
+MaxEmptyLinesToKeep: 1
+IndentWrappedFunctionNames: false
+IndentPPDirectives: BeforeHash
+IndentGotoLabels: true
+
+BraceWrapping:
+  AfterEnum: true
+  AfterStruct: true
+  SplitEmptyFunction: true
+
+ColumnLimit: 120
+
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InConditionalStatements: true
+  InEmptyParentheses: false
+  InCStyleCasts: true
+  Other: true
