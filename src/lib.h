@@ -184,7 +184,7 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_EQ_STRUCT_SIZE( TESTNAME, expect, actual )                                                         \
+#define NANO_ASSERT_EQ_SIZE( TESTNAME, expect, actual )                                                                \
 	do                                                                                                             \
 	{                                                                                                              \
 		if ( sizeof( expect ) != sizeof( actual ) )                                                            \
