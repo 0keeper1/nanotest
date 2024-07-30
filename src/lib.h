@@ -14,7 +14,7 @@
 #define NANO_GROUP_TEST( GROUPTESTNAME, ... )                                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
-		fprintf( stderr, "Executing test group \"%s\"...\n", TESTGROUPNAME );                                  \
+		fprintf( stderr, "Executing test group \"%s\"...\n", GROUPTESTNAME );                                  \
 		void ( *funcs[] )( void ) = { __VA_ARGS__ };                                                           \
 		const char *fnames = #__VA_ARGS__;                                                                     \
 		size_t count = sizeof( funcs ) / sizeof( funcs[0] );                                                   \
