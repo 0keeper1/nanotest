@@ -11,6 +11,12 @@
 		fprintf( stderr, "EXITING THE %s ...\n", #func );                                                      \
 	} while ( 0 )
 
+#define NANO_IGNORE_TEST( WHY, func )                                                                                  \
+	do                                                                                                             \
+	{                                                                                                              \
+		fprintf( stderr, "TEST IGNORED BECAUSE %s %s ...\n", WHY, #func );                                     \
+	} while ( 0 )
+
 #define NANO_GROUP_TEST( GROUPTESTNAME, ... )                                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
