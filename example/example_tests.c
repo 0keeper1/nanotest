@@ -45,7 +45,7 @@ void test_sum_float()
 	y = 4.2f;
 	result = sum_float( x, y );
 
-	NANO_ASSERT_NOTEQ_FLOAT( "7.3 + 4.2 must not be equal to 5.2", 5.2, result );
+	NANO_ASSERT_NOTEQ_FLOAT( "7.3 + 4.2 must not be equal to 5.2", 5.2f, result );
 
 	x = 8.1f;
 	y = 1.4f;

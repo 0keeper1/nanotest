@@ -177,6 +177,7 @@ enum T_TYPES
 #define NANO_ASSERT_NOTEQ_FLOAT( TESTNAME, expected, actual )                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f, got: %f.\n", TESTNAME,       \
@@ -320,6 +321,7 @@ enum T_TYPES
 #define NANO_ASSERT_TRUE( TESTNAME, actual )                                                                           \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                      \
 		if ( !actual )                                                                                         \
 		{                                                                                                      \
 			fprintf(                                                                                       \
@@ -341,6 +343,7 @@ enum T_TYPES
 #define NANO_ASSERT_FALSE( TESTNAME, actual )                                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                 \
 		if ( actual )                                                                                          \
 		{                                                                                                      \
 			fprintf(                                                                                       \
