@@ -39,19 +39,19 @@ void test_sum_float()
 
 	result = sum_float( x, y );
 
-	NANO_ASSERT_EQ_FLOAT( "test sum_float function", 7.5, result );
+	NANO_ASSERT_EQ_FLOAT( "test sum_float function", ( float )7.5, result );
 
 	x = 8.1;
 	y = 1.4;
 	result = sum_float( x, y );
 
-	NANO_ASSERT_LE_FLOAT( "test sum_float function", 10.9, result );
+	NANO_ASSERT_LE_FLOAT( "test sum_float function", ( float )10.9, result );
 
 	x = 9.7;
 	y = 3.2;
 	result = sum_float( x, y );
 
-	NANO_ASSERT_GE_FLOAT( "test sum_float function", 10.5, result );
+	NANO_ASSERT_GE_FLOAT( "test sum_float function", ( float )10.5, result );
 }
 
 void test_is_odd()
@@ -62,32 +62,33 @@ void test_is_odd()
 	num = 2;
 	result = is_odd( num );
 
-	NANO_ASSERT_EQ_BOOL( "test is odd: false", false, result );
+	NANO_ASSERT_EQ_BOOL( "test is odd: false", ( _Bool ) false, result );
 
 	num = 3;
 	result = is_odd( num );
 
-	NANO_ASSERT_EQ_BOOL( "test is odd: true", true, result );
+	NANO_ASSERT_EQ_BOOL( "test is odd: true", ( _Bool ) true, result );
 }
 
 void test_is_n()
 {
-	NANO_ASSERT_EQ_BOOL( "is n", true, is_n( 'n' ) );
-	NANO_ASSERT_EQ_BOOL( "isn't n", false, is_n( 'm' ) );
+	NANO_ASSERT_EQ_BOOL( "is n", ( _Bool ) true, is_n( 'n' ) );
+	NANO_ASSERT_EQ_BOOL( "isn't n", ( _Bool ) false, is_n( 'm' ) );
 }
 
 void test_next_char()
 {
 	char c = 'a';
-	NANO_ASSERT_EQ_CHAR( "test next char", 'b', next_char( c ) );
+	NANO_ASSERT_EQ_CHAR( "test next char", ( char )'b', next_char( c ) );
 }
 
 void test_ptr_cmp()
 {
-	int *x = int_ptr( 1 );
+	int num = 1;
+	int *x = int_ptr( &num );
 	NANO_ASSERT_EQ_PTR( "test pointer compare", x, x );
 
-	int *y;
+	int *y = NULL;
 	NANO_ASSERT_NOTEQ_PTR( "test pointer compare", x, y );
 }
 

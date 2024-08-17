@@ -1,7 +1,20 @@
 #pragma once
 
+#include <assert.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+
+enum T_TYPES
+{
+	T_BOOL,
+	T_INT,
+	T_CHAR,
+	T_FLOAT,
+	UNKNOWN,
+};
+
+#define Type( x ) _Generic( ( x ), _Bool: T_BOOL, float: T_FLOAT, char: T_CHAR, int: T_INT, default: UNKNOWN )
 
 /**
  * @brief Runs one single test.
@@ -59,6 +72,7 @@
 #define NANO_ASSERT_EQ_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %d, got: %d.\n", TESTNAME,       \
@@ -79,6 +93,7 @@
 #define NANO_ASSERT_GE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be greater than %d.\n",     \
@@ -99,6 +114,7 @@
 #define NANO_ASSERT_LE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be less than %d.\n",        \
@@ -119,6 +135,7 @@
 #define NANO_ASSERT_NOTEQ_INT( TESTNAME, expected, actual )                                                            \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %d not expected to be equal to %d .\n",    \
@@ -139,6 +156,7 @@
 #define NANO_ASSERT_EQ_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f Got %f.\n", TESTNAME,          \
@@ -159,6 +177,7 @@
 #define NANO_ASSERT_GE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be greater than %f.\n",     \
@@ -179,6 +198,7 @@
 #define NANO_ASSERT_LE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f to be less than %f.\n",       \
@@ -199,6 +219,7 @@
 #define NANO_ASSERT_EQ_CHAR( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ) );                          \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
@@ -259,6 +280,7 @@
 #define NANO_ASSERT_EQ_BOOL( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_BOOL && Type( actual ) == T_BOOL ) );                          \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %s, got %s.\n", TESTNAME,        \
