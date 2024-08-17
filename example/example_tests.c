@@ -34,31 +34,31 @@ void test_sum_int()
 void test_sum_float()
 {
 	float x, y, result;
-	x = 3.1;
-	y = 4.4;
+	x = 3.1f;
+	y = 4.4f;
 
 	result = sum_float( x, y );
 
-	NANO_ASSERT_EQ_FLOAT( "3.1 + 4.4 must be equal 7.5 to", 7.5, result );
+	NANO_ASSERT_EQ_FLOAT( "3.1 + 4.4 must be equal 7.5 to", 7.5f, result );
 
-	x = 7.3;
-	y = 4.2;
+	x = 7.3f;
+	y = 4.2f;
 	result = sum_float( x, y );
 
 	NANO_ASSERT_NOTEQ_FLOAT( "7.3 + 4.2 must not be equal to 5.2", 5.2, result );
 
-	x = 8.1;
-	y = 1.4;
+	x = 8.1f;
+	y = 1.4f;
 	result = sum_float( x, y );
 
 
-	NANO_ASSERT_LE_FLOAT( "8.1 + 1.4 must be less than 10.9", 10.9, result );
+	NANO_ASSERT_LE_FLOAT( "8.1 + 1.4 must be less than 10.9", 10.9f, result );
 
-	x = 9.7;
-	y = 3.2;
+	x = 9.7f;
+	y = 3.2f;
 	result = sum_float( x, y );
 
-	NANO_ASSERT_GE_FLOAT( "9.7 + 3.2 must be greater than 10.5", 10.5, result );
+	NANO_ASSERT_GE_FLOAT( "9.7 + 3.2 must be greater than 10.5", 10.5f, result );
 }
 
 void test_is_odd()
@@ -86,13 +86,14 @@ void test_is_n()
 void test_next_char()
 {
 	char c = 'a';
-	NANO_ASSERT_EQ_CHAR( "b is next char of a in ASCII table", 'b', next_char( c ) );
-	NANO_ASSERT_NOTEQ_CHAR( "c is not next char of a in ASCII table", 'c', next_char( c ) );
+	NANO_ASSERT_EQ_CHAR( "b is next char of a in ASCII table", (char) 'b', next_char( c ) );
+	NANO_ASSERT_NOTEQ_CHAR( "c is not next char of a in ASCII table", (char) 'c', next_char( c ) );
 }
 
 void test_ptr_cmp()
 {
-	int *x = int_ptr( 1 );
+	int num = 1;
+	int *x = int_ptr( &num );
 	NANO_ASSERT_EQ_PTR( "expected and actual value are same pointers", x, x );
 
 	int *y;

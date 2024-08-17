@@ -260,6 +260,7 @@ enum T_TYPES
 #define NANO_ASSERT_NOTEQ_CHAR( TESTNAME, expected, actual )                                                           \
 	do                                                                                                             \
 	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ) );                          \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
