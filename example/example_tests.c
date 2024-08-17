@@ -51,7 +51,6 @@ void test_sum_float()
 	y = 1.4f;
 	result = sum_float( x, y );
 
-
 	NANO_ASSERT_LE_FLOAT( "8.1 + 1.4 must be less than 10.9", 10.9f, result );
 
 	x = 9.7f;
@@ -86,8 +85,8 @@ void test_is_n()
 void test_next_char()
 {
 	char c = 'a';
-	NANO_ASSERT_EQ_CHAR( "b is next char of a in ASCII table", (char) 'b', next_char( c ) );
-	NANO_ASSERT_NOTEQ_CHAR( "c is not next char of a in ASCII table", (char) 'c', next_char( c ) );
+	NANO_ASSERT_EQ_CHAR( "b is next char of a in ASCII table", ( char )'b', next_char( c ) );
+	NANO_ASSERT_NOTEQ_CHAR( "c is not next char of a in ASCII table", ( char )'c', next_char( c ) );
 }
 
 void test_ptr_cmp()

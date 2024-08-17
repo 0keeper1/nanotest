@@ -321,7 +321,7 @@ enum T_TYPES
 #define NANO_ASSERT_TRUE( TESTNAME, actual )                                                                           \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                      \
+		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                        \
 		if ( !actual )                                                                                         \
 		{                                                                                                      \
 			fprintf(                                                                                       \
@@ -343,7 +343,7 @@ enum T_TYPES
 #define NANO_ASSERT_FALSE( TESTNAME, actual )                                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                 \
+		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                        \
 		if ( actual )                                                                                          \
 		{                                                                                                      \
 			fprintf(                                                                                       \
