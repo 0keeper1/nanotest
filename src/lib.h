@@ -3,7 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 
-// Runs one single test.
+/**
+ * @brief Runs one single test.
+ * @param func The test function to be executed.
+**/
 #define NANO_SINGLE_TEST( func, ... )                                                                                  \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -12,14 +15,22 @@
 		fprintf( stderr, "EXITING THE %s ...\n", #func );                                                      \
 	} while ( 0 )
 
-// Ignores one test with provided reason.
+/**
+ * @brief Ignores one test with provided reason.
+ * @param REASON Reason that we ignored the test.
+ * @param func   Ignored test function.
+**/
 #define NANO_IGNORE_TEST( REASON, func )                                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		fprintf( stderr, "%s TEST IGNORED REASON: %s\n", #func, REASON );                                  \
+		fprintf( stderr, "%s TEST IGNORED REASON: %s\n", #func, REASON );                                      \
 	} while ( 0 )
 
-// Runs a group of provided test in order.
+/**
+ * @brief Runs a group of provided test in order.
+ * @param GROUPTESTNAME A human-readable name to identify the group of tests.
+ * @param ... Test functions to be called.
+**/
 #define NANO_GROUP_TEST( GROUPTESTNAME, ... )                                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -39,7 +50,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual integer is equal to given expected integer value.
+/**
+ * @brief Checks if actual integer is equal to given expected integer value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_EQ_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -54,7 +70,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual integer is greater than given expected integer value.
+/**
+ * @brief Checks if actual integer is greater than given expected integer value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_GE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -69,7 +90,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual integer is less than given expected integer value.
+/**
+ * @brief Checks if actual integer is less than given expected integer value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_LE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -84,7 +110,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual integer is not equal to given expected integer value.
+/**
+ * @brief Checks if actual integer is not equal to given expected integer value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_NOTEQ_INT( TESTNAME, expected, actual )                                                            \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -99,8 +130,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-
-// Checks if actual float is equal to given expected float value.
+/**
+ * @brief Checks if actual float is equal to given expected float value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_EQ_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -115,7 +150,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual float is greater than given expected float value.
+/**
+ * @brief Checks if actual float is greater than given expected float value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_GE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -124,13 +164,18 @@
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be greater than %f.\n",     \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
-		else                                                                                                 \
+		else                                                                                                   \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual float is less than given expected float value.
+/**
+ * @brief Checks if actual float is less than given expected float value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_LE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -145,7 +190,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual char is equal to given expected char value.
+/**
+ * @brief Checks if actual char is equal to given expected char value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_EQ_CHAR( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -160,7 +210,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual pointer is equal to given expected pointer.
+/**
+ * @brief Checks if actual pointer is equal to given expected pointer.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_EQ_PTR( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -175,7 +230,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual pointer is not equal to given expected pointer.
+/**
+ * @brief Checks if actual pointer is not equal to given expected pointer.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_NOTEQ_PTR( TESTNAME, expected, actual )                                                            \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -190,7 +250,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual boolean is equal to given expected boolean value.
+/**
+ * @brief Checks if actual boolean is equal to given expected boolean value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_EQ_BOOL( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
@@ -205,7 +270,12 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-// Checks if actual value size is equal to given expected value size.
+/**
+ * @brief Checks if actual value size is equal to given expected value size.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
 #define NANO_ASSERT_EQ_SIZE( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
