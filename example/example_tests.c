@@ -2,21 +2,56 @@
 #include "example_functions.h"
 #include <stdbool.h>
 
-void test_sum()
+void test_sum_int()
 {
 	int x, y, result;
 	x = 3;
 	y = 4;
 
-	result = sum( x, y );
+	result = sum_int( x, y );
 
-	NANO_ASSERT_EQ_INT( "test sum function", 7, result );
+	NANO_ASSERT_EQ_INT( "test sum_int function", 7, result );
 
 	x = 100;
 	y = 200;
-	result = sum( x, y );
+	result = sum_int( x, y );
 
-	NANO_ASSERT_EQ_INT( "test sum function", 300, result );
+	NANO_ASSERT_NOTEQ_INT( "test sum_int function", 301, result );
+
+	x = 8;
+	y = 1;
+	result = sum_int( x, y );
+
+	NANO_ASSERT_LE_INT( "test sum_int function", 10, result );
+
+	x = 9;
+	y = 3;
+	result = sum_int( x, y );
+
+	NANO_ASSERT_GE_INT( "test sum_int function", 10, result );
+}
+
+void test_sum_float()
+{
+	float x, y, result;
+	x = 3.1;
+	y = 4.4;
+
+	result = sum_float( x, y );
+
+	NANO_ASSERT_EQ_FLOAT( "test sum_float function", 7.5, result );
+
+	x = 8.1;
+	y = 1.4;
+	result = sum_float( x, y );
+
+	NANO_ASSERT_LE_FLOAT( "test sum_float function", 10.9, result );
+
+	x = 9.7;
+	y = 3.2;
+	result = sum_float( x, y );
+
+	NANO_ASSERT_GE_FLOAT( "test sum_float function", 10.5, result );
 }
 
 void test_is_odd()
@@ -41,13 +76,40 @@ void test_is_n()
 	NANO_ASSERT_EQ_BOOL( "isn't n", false, is_n( 'm' ) );
 }
 
+void test_next_char()
+{
+	char c = 'a';
+	NANO_ASSERT_EQ_CHAR( "test next char", 'b', next_char( c ) );
+}
+
+void test_ptr_cmp()
+{
+	int *x = int_ptr( 1 );
+	NANO_ASSERT_EQ_PTR( "test pointer compare", x, x );
+
+	int *y;
+	NANO_ASSERT_NOTEQ_PTR( "test pointer compare", x, y );
+}
+
+void test_size()
+{
+	int x = 10;
+	NANO_ASSERT_EQ_SIZE( "test size equal", x, x );
+}
+
+void test_ignored() {}
+
 int main()
 {
 	// single test
 	NANO_SINGLE_TEST( test_is_n );
 
 	// group test
-	NANO_GROUP_TEST( "math functions test", test_is_odd, test_sum );
+	NANO_GROUP_TEST( "Math functions test", test_is_odd, test_sum_int, test_sum_float, test_next_char, test_ptr_cmp,
+			 test_size );
+
+	// ignored test
+	NANO_IGNORE_TEST( "Empty test must be ignored", test_ignored );
 
 	return 0;
 }
