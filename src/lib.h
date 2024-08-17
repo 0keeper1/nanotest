@@ -36,13 +36,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_EQ_INT( TESTNAME, expect, actual )                                                                 \
+#define NANO_ASSERT_EQ_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect != actual )                                                                                \
+		if ( expected != actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %d Got %d.\n", TESTNAME,          \
-				 __FILE__, __LINE__, expect, actual );                                                 \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %d, got: %d.\n", TESTNAME,       \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -50,13 +50,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_GE_INT( TESTNAME, expect, actual )                                                                 \
+#define NANO_ASSERT_GE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect > actual )                                                                                 \
+		if ( expected > actual )                                                                               \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %d to be greater than %d.\n",     \
-				 TESTNAME, __FILE__, __LINE__, expect, actual );                                       \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be greater than %d.\n",     \
+				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -64,13 +64,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_LE_INT( TESTNAME, expect, actual )                                                                 \
+#define NANO_ASSERT_LE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect < actual )                                                                                 \
+		if ( expected < actual )                                                                               \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %d to be less than %d.\n",        \
-				 TESTNAME, __FILE__, __LINE__, expect, actual );                                       \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be less than %d.\n",        \
+				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -78,13 +78,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_NOTEQ_INT( TESTNAME, expect, actual )                                                              \
+#define NANO_ASSERT_NOTEQ_INT( TESTNAME, expected, actual )                                                            \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect == actual )                                                                                \
+		if ( expected == actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %d Not expected to be equal to %d .\n",    \
-				 TESTNAME, __FILE__, __LINE__, expect, actual );                                       \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %d not expected to be equal to %d .\n",    \
+				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -92,13 +92,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_EQ_FLOAT( TESTNAME, expect, actual )                                                               \
+#define NANO_ASSERT_EQ_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect != actual )                                                                                \
+		if ( expected != actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %f Got %f.\n", TESTNAME,          \
-				 __FILE__, __LINE__, expect, actual );                                                 \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f Got %f.\n", TESTNAME,          \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -106,13 +106,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_GE_FLOAT( TESTNAME, expect, actual )                                                               \
+#define NANO_ASSERT_GE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect > actual )                                                                                 \
+		if ( expected > actual )                                                                               \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %f to be greater than %f.\n",     \
-				 TESTNAME, __FILE__, __LINE__, expect, actual );                                       \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be greater than %f.\n",     \
+				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		s else                                                                                                 \
 		{                                                                                                      \
@@ -120,13 +120,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_LE_FLOAT( TESTNAME, expect, actual )                                                               \
+#define NANO_ASSERT_LE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect < actual )                                                                                 \
+		if ( expected < actual )                                                                               \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %f to be less than %f.\n",        \
-				 TESTNAME, __FILE__, __LINE__, expect, actual );                                       \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f to be less than %f.\n",       \
+				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -134,13 +134,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_EQ_CHAR( TESTNAME, expect, actual )                                                                \
+#define NANO_ASSERT_EQ_CHAR( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect != actual )                                                                                \
+		if ( expected != actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected '%c' Got '%c'.\n", TESTNAME,      \
-				 __FILE__, __LINE__, expect, actual );                                                 \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -148,13 +148,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_EQ_PTR( TESTNAME, expect, actual )                                                                 \
+#define NANO_ASSERT_EQ_PTR( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect != actual )                                                                                \
+		if ( expected != actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %p Got %p.\n", TESTNAME,          \
-				 __FILE__, __LINE__, expect, actual );                                                 \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %p, got: %p.\n", TESTNAME,       \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -162,13 +162,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_NOTEQ_PTR( TESTNAME, expect, actual )                                                              \
+#define NANO_ASSERT_NOTEQ_PTR( TESTNAME, expected, actual )                                                            \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect == actual )                                                                                \
+		if ( expected == actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %p Not expected to be equal to %p .\n",    \
-				 TESTNAME, __FILE__, __LINE__, expect, actual );                                       \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %p not expected to be equal to %p .\n",    \
+				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -176,13 +176,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_EQ_BOOL( TESTNAME, expect, actual )                                                                \
+#define NANO_ASSERT_EQ_BOOL( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expect != actual )                                                                                \
+		if ( expected != actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected %s Got %s.\n", TESTNAME,          \
-				 __FILE__, __LINE__, expect ? "true" : "false", actual ? "true" : "false" );           \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %s, got %s.\n", TESTNAME,        \
+				 __FILE__, __LINE__, expected ? "true" : "false", actual ? "true" : "false" );         \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -190,13 +190,13 @@
 		}                                                                                                      \
 	} while ( 0 )
 
-#define NANO_ASSERT_EQ_SIZE( TESTNAME, expect, actual )                                                                \
+#define NANO_ASSERT_EQ_SIZE( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( sizeof( expect ) != sizeof( actual ) )                                                            \
+		if ( sizeof( expected ) != sizeof( actual ) )                                                          \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: Expected size %ld Got size %ld.\n",        \
-				 TESTNAME, __FILE__, __LINE__, sizeof( expect ), sizeof( actual ) );                   \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
+				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
