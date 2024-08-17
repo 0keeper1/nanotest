@@ -1,31 +1,32 @@
 # NaNotest
 
-NaNotest provides simple macros for unit testing. 
+NaNotest is minimalistic testing library for C, focused to be lightweight and simple.
 
-# Usage
+# Examples
 
-- Single Test:
+- Single test example
 
-    ```c
-    void comparexandy() { 
-        int x, y;
-        x = 3; y = 2;
-        NANO_ASSERT_EQ_INT("cmp x and y", x, y);
-    }
+```c
+int sum(int x, int y) { return x + y; }
 
-    int main () {
-        NANO_SINGLE_TEST(comparexandy);
-        return 0;
-    }
-    ```
-- Group Test:
-    
-    ```c
-    void test1() { /* something */ }
-    void test2() { /* something */ }
-    void test3() { /* something */ }
-    int main () {
-        NANO_GROUP_TEST("examples", test1, test2, test3);
-        return 0;
-    }
-    ```
+void test_sum()
+{
+	int x, y;
+	x = sum(3, 4);
+	y = sum(5, 2);
+	
+	NANO_ASSERT_EQ_INT( "cmp x and y", x, y );
+}
+
+int main()
+{
+	NANO_SINGLE_TEST( test_sum );
+	return 0;
+}
+```
+
+You can find a full example of the NaNotest usage example [here](./example/).
+
+# License
+
+This library is published under [MIT License](./LICENSE).
