@@ -51,6 +51,7 @@ void test_sum_float()
 	y = 1.4;
 	result = sum_float( x, y );
 
+
 	NANO_ASSERT_LE_FLOAT( "8.1 + 1.4 must be less than 10.9", 10.9, result );
 
 	x = 9.7;
