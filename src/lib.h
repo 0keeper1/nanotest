@@ -141,7 +141,27 @@
 	{                                                                                                              \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f Got %f.\n", TESTNAME,          \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f, got: %f.\n", TESTNAME,        \
+				 __FILE__, __LINE__, expected, actual );                                               \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual float is not equal to given expected float value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
+#define NANO_ASSERT_NOTEQ_FLOAT( TESTNAME, expected, actual )                                                          \
+	do                                                                                                             \
+	{                                                                                                              \
+		if ( expected == actual )                                                                              \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f, got: %f.\n", TESTNAME,       \
 				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
@@ -181,7 +201,7 @@
 	{                                                                                                              \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f to be less than %f.\n",       \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be less than %f.\n",        \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
@@ -200,6 +220,26 @@
 	do                                                                                                             \
 	{                                                                                                              \
 		if ( expected != actual )                                                                              \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
+				 __FILE__, __LINE__, expected, actual );                                               \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual char is not equal to given expected char value.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
+#define NANO_ASSERT_NOTEQ_CHAR( TESTNAME, expected, actual )                                                           \
+	do                                                                                                             \
+	{                                                                                                              \
+		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
 				 __FILE__, __LINE__, expected, actual );                                               \
@@ -251,18 +291,40 @@
 	} while ( 0 )
 
 /**
- * @brief Checks if actual boolean is equal to given expected boolean value.
+ * @brief Checks if actual boolean is true.
  * @param TESTNAME A human-readable name to identify the test.
- * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
 **/
-#define NANO_ASSERT_EQ_BOOL( TESTNAME, expected, actual )                                                              \
+#define NANO_ASSERT_TRUE( TESTNAME, actual )                                                                           \
 	do                                                                                                             \
 	{                                                                                                              \
-		if ( expected != actual )                                                                              \
+		if ( !actual )                                                                                         \
 		{                                                                                                      \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %s, got %s.\n", TESTNAME,        \
-				 __FILE__, __LINE__, expected ? "true" : "false", actual ? "true" : "false" );         \
+			fprintf(                                                                                       \
+			    stderr,                                                                                    \
+			    "\t\"%s\" file: %s line: %d Error: expected actual value to be true, but got false.\n",    \
+			    TESTNAME, __FILE__, __LINE__ );                                                            \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual boolean is false.
+ * @param TESTNAME A human-readable name to identify the test..
+ * @param actual   The value which we received.
+**/
+#define NANO_ASSERT_FALSE( TESTNAME, actual )                                                                          \
+	do                                                                                                             \
+	{                                                                                                              \
+		if ( actual )                                                                                          \
+		{                                                                                                      \
+			fprintf(                                                                                       \
+			    stderr,                                                                                    \
+			    "\t\"%s\" file: %s line: %d Error: expected actual value to be false, but got true.\n",    \
+			    TESTNAME, __FILE__, __LINE__ );                                                            \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -280,6 +342,66 @@
 	do                                                                                                             \
 	{                                                                                                              \
 		if ( sizeof( expected ) != sizeof( actual ) )                                                          \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
+				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual value size is not equal to given expected value size.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
+#define NANO_ASSERT_NOTEQ_SIZE( TESTNAME, expected, actual )                                                           \
+	do                                                                                                             \
+	{                                                                                                              \
+		if ( sizeof( expected ) == sizeof( actual ) )                                                          \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
+				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual value size is greater than given expected value size.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
+#define NANO_ASSERT_GE_SIZE( TESTNAME, expected, actual )                                                              \
+	do                                                                                                             \
+	{                                                                                                              \
+		if ( sizeof( expected ) > sizeof( actual ) )                                                           \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
+				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual value size is less than given expected value size.
+ * @param TESTNAME A human-readable name to identify the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+**/
+#define NANO_ASSERT_LE_SIZE( TESTNAME, expected, actual )                                                              \
+	do                                                                                                             \
+	{                                                                                                              \
+		if ( sizeof( expected ) < sizeof( actual ) )                                                           \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
 				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
