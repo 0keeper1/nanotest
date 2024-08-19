@@ -72,7 +72,8 @@ enum T_TYPES
 #define NANO_ASSERT_EQ_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
+				"Actual and expected must be in int type" );                                           \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %d, got: %d.\n", TESTNAME,       \
@@ -93,7 +94,8 @@ enum T_TYPES
 #define NANO_ASSERT_GE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
+				"Actual and expected must be in int type" );                                           \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be greater than %d.\n",     \
@@ -114,7 +116,8 @@ enum T_TYPES
 #define NANO_ASSERT_LE_INT( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
+				"Actual and expected must be in int type" );                                           \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be less than %d.\n",        \
@@ -135,7 +138,8 @@ enum T_TYPES
 #define NANO_ASSERT_NOTEQ_INT( TESTNAME, expected, actual )                                                            \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ) );                            \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
+				"Actual and expected must be in int type" );                                           \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %d not expected to be equal to %d .\n",    \
@@ -156,7 +160,8 @@ enum T_TYPES
 #define NANO_ASSERT_EQ_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
+				"Actual and expected must be in float type" );                                         \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f, got: %f.\n", TESTNAME,        \
@@ -177,7 +182,8 @@ enum T_TYPES
 #define NANO_ASSERT_NOTEQ_FLOAT( TESTNAME, expected, actual )                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
+				"Actual and expected must be in float type" );                                         \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f, got: %f.\n", TESTNAME,       \
@@ -198,7 +204,8 @@ enum T_TYPES
 #define NANO_ASSERT_GE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
+				"Actual and expected must be in float type" );                                         \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be greater than %f.\n",     \
@@ -219,7 +226,8 @@ enum T_TYPES
 #define NANO_ASSERT_LE_FLOAT( TESTNAME, expected, actual )                                                             \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ) );                        \
+		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
+				"Actual and expected must be in float type" );                                         \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be less than %f.\n",        \
@@ -240,7 +248,8 @@ enum T_TYPES
 #define NANO_ASSERT_EQ_CHAR( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ) );                          \
+		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ),                            \
+				"Actual and expected must be in char type" );                                          \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
@@ -261,7 +270,8 @@ enum T_TYPES
 #define NANO_ASSERT_NOTEQ_CHAR( TESTNAME, expected, actual )                                                           \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ) );                          \
+		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ),                            \
+				"Actual and expected must be in char type" );                                          \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
@@ -321,7 +331,7 @@ enum T_TYPES
 #define NANO_ASSERT_TRUE( TESTNAME, actual )                                                                           \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                        \
+		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
 		if ( !actual )                                                                                         \
 		{                                                                                                      \
 			fprintf(                                                                                       \
@@ -343,7 +353,7 @@ enum T_TYPES
 #define NANO_ASSERT_FALSE( TESTNAME, actual )                                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
-		_Static_assert( ( Type( actual ) == T_BOOL ) );                                                        \
+		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
 		if ( actual )                                                                                          \
 		{                                                                                                      \
 			fprintf(                                                                                       \
