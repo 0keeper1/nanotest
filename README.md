@@ -7,16 +7,15 @@ NaNotest is minimalistic testing library for C, focused to be lightweight and si
 - Single test example
 
 ```c
-int sum(int x, int y) { return x + y; }
+NANO_FUNCTION( test_sum, {
+	int x;
+	int y;
 
-void test_sum()
-{
-	int x, y;
 	x = sum(3, 4);
 	y = sum(5, 2);
 	
 	NANO_ASSERT_EQ_INT( "cmp x and y", x, y );
-}
+})
 
 NANO_MAIN( {
 	NANO_SINGLE_TEST( test_sum );

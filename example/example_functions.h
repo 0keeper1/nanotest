@@ -1,3 +1,5 @@
+#pragma once
+
 #include "stdbool.h"
 
 static inline int sum_int( int x, int y ) { return x + y; }

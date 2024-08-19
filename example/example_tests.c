@@ -2,9 +2,11 @@
 #include "example_functions.h"
 #include <stdbool.h>
 
-void test_sum_int()
-{
-	int x, y, result;
+NANO_FUNCTION( test_sum_int, {
+	int x;
+	int y;
+	int result;
+
 	x = 3;
 	y = 4;
 
@@ -29,11 +31,13 @@ void test_sum_int()
 	result = sum_int( x, y );
 
 	NANO_ASSERT_GE_INT( "9 + 3 must be greater than 10", 10, result );
-}
+} )
 
-void test_sum_float()
-{
-	float x, y, result;
+NANO_FUNCTION( test_sum_float, {
+	float x;
+	float y;
+	float result;
+
 	x = 3.1f;
 	y = 4.4f;
 
@@ -58,10 +62,9 @@ void test_sum_float()
 	result = sum_float( x, y );
 
 	NANO_ASSERT_GE_FLOAT( "9.7 + 3.2 must be greater than 10.5", 10.5f, result );
-}
+} )
 
-void test_is_odd()
-{
+NANO_FUNCTION( test_is_odd, {
 	bool result;
 	int num;
 
@@ -74,38 +77,34 @@ void test_is_odd()
 	result = is_odd( num );
 
 	NANO_ASSERT_TRUE( "3 is an odd number, we expect result to be true", result );
-}
+} )
 
-void test_is_n()
-{
+NANO_FUNCTION( test_is_n, {
 	NANO_ASSERT_TRUE( "n is equal to n", is_n( 'n' ) );
 	NANO_ASSERT_FALSE( "m is not equal to n", is_n( 'm' ) );
-}
+} )
 
-void test_next_char()
-{
+NANO_FUNCTION( test_next_char, {
 	char c = 'a';
 	NANO_ASSERT_EQ_CHAR( "b is next char of a in ASCII table", ( char )'b', next_char( c ) );
 	NANO_ASSERT_NOTEQ_CHAR( "c is not next char of a in ASCII table", ( char )'c', next_char( c ) );
-}
+} )
 
-void test_ptr_cmp()
-{
+NANO_FUNCTION( test_ptr_cmp, {
 	int num = 1;
 	int *x = int_ptr( &num );
 	NANO_ASSERT_EQ_PTR( "expected and actual value are same pointers", x, x );
 
 	int *y;
 	NANO_ASSERT_NOTEQ_PTR( "y is a wild pointer, not equal to x", x, y );
-}
+} )
 
-void test_size()
-{
+NANO_FUNCTION( test_size, {
 	int x = 10;
 	NANO_ASSERT_EQ_SIZE( "size of same value must be equal", x, x );
-}
+} )
 
-void test_ignored() {}
+NANO_FUNCTION( test_ignored, {} )
 
 NANO_MAIN( {
 	// single test

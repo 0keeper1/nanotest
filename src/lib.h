@@ -16,8 +16,12 @@ enum T_TYPES
 
 #define Type( x ) _Generic( ( x ), _Bool: T_BOOL, float: T_FLOAT, char: T_CHAR, int: T_INT, default: UNKNOWN )
 
-static unsigned int TOTAL_SUCCESSFUL_COUNTER = 0;
+static unsigned int TOTAL_TEST_COUNTER = 0;
 static unsigned int TOTAL_FAILED_COUNTER = 0;
+static unsigned int TOTAL_SUCCESSFUL_COUNTER = 0;
+static unsigned int TOTAL_TEST_COUNTER_PER_FUNCTION = 0;
+static unsigned int TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;
+static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Runs one single test.
@@ -26,9 +30,7 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_SINGLE_TEST( func, ... )                                                                                  \
 	do                                                                                                             \
 	{                                                                                                              \
-		fprintf( stderr, "RUNNING THE %s ...\n", #func );                                                      \
 		( func )( __VA_ARGS__ );                                                                               \
-		fprintf( stderr, "EXITING THE %s ...\n", #func );                                                      \
 	} while ( 0 )
 
 /**
@@ -39,7 +41,9 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_IGNORE_TEST( REASON, func )                                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
-		fprintf( stderr, "%s TEST IGNORED REASON: %s\n", #func, REASON );                                      \
+		fprintf( stderr, "vvv %s\n\n", #func );                                                                \
+		fprintf( stderr, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__ );                          \
+		fprintf( stderr, "vvv\n" );                                                                            \
 	} while ( 0 )
 
 /**
@@ -50,7 +54,6 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_GROUP_TEST( GROUPTESTNAME, ... )                                                                          \
 	do                                                                                                             \
 	{                                                                                                              \
-		fprintf( stderr, "Executing test group \"%s\"...\n", GROUPTESTNAME );                                  \
 		void ( *funcs[] )( void ) = { __VA_ARGS__ };                                                           \
 		const char *fnames = #__VA_ARGS__;                                                                     \
 		size_t count = sizeof( funcs ) / sizeof( funcs[0] );                                                   \
@@ -59,9 +62,7 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 		char *fname = strtok( fnamescp, ", " );                                                                \
 		for ( size_t i = 0; i < count; ++i )                                                                   \
 		{                                                                                                      \
-			fprintf( stderr, "RUNNING THE %s ...\n", fname );                                              \
 			( funcs[i] )();                                                                                \
-			fprintf( stderr, "EXITING THE %s ...\n", fname );                                              \
 			fname = strtok( NULL, ", " );                                                                  \
 		}                                                                                                      \
 	} while ( 0 )
@@ -77,16 +78,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
 				"Actual and expected must be in int type" );                                           \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %d, got: %d.\n", TESTNAME,       \
-				 __FILE__, __LINE__, expected, actual );                                               \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %d, got: %d.\n", TESTNAME, __FILE__,       \
+				 __LINE__, expected, actual );                                                         \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -101,16 +106,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
 				"Actual and expected must be in int type" );                                           \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be greater than %d.\n",     \
-				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n", TESTNAME,     \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -125,16 +134,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
 				"Actual and expected must be in int type" );                                           \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be less than %d.\n",        \
-				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be less than %d.\n", TESTNAME,        \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -149,16 +162,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
 				"Actual and expected must be in int type" );                                           \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %d not expected to be equal to %d .\n",    \
-				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: %d not expected to be equal to %d .\n", TESTNAME,    \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -173,16 +190,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
 				"Actual and expected must be in float type" );                                         \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f, got: %f.\n", TESTNAME,        \
-				 __FILE__, __LINE__, expected, actual );                                               \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f, got: %f.\n", TESTNAME, __FILE__,        \
+				 __LINE__, expected, actual );                                                         \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -197,16 +218,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
 				"Actual and expected must be in float type" );                                         \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f, got: %f.\n", TESTNAME,       \
-				 __FILE__, __LINE__, expected, actual );                                               \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %f, got: %f.\n", TESTNAME, __FILE__,       \
+				 __LINE__, expected, actual );                                                         \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -221,16 +246,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
 				"Actual and expected must be in float type" );                                         \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be greater than %f.\n",     \
-				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be greater than %f.\n", TESTNAME,     \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -245,16 +274,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
 				"Actual and expected must be in float type" );                                         \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be less than %f.\n",        \
-				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be less than %f.\n", TESTNAME,        \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -269,16 +302,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ),                            \
 				"Actual and expected must be in char type" );                                          \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
-				 __FILE__, __LINE__, expected, actual );                                               \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n", TESTNAME, __FILE__,    \
+				 __LINE__, expected, actual );                                                         \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -293,16 +330,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ),                            \
 				"Actual and expected must be in char type" );                                          \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
-				 __FILE__, __LINE__, expected, actual );                                               \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n", TESTNAME, __FILE__,    \
+				 __LINE__, expected, actual );                                                         \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -315,16 +356,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_ASSERT_EQ_PTR( TESTNAME, expected, actual )                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %p, got: %p.\n", TESTNAME,       \
-				 __FILE__, __LINE__, expected, actual );                                               \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %p, got: %p.\n", TESTNAME, __FILE__,       \
+				 __LINE__, expected, actual );                                                         \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -337,16 +382,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_ASSERT_NOTEQ_PTR( TESTNAME, expected, actual )                                                            \
 	do                                                                                                             \
 	{                                                                                                              \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %p not expected to be equal to %p .\n",    \
-				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: %p not expected to be equal to %p .\n", TESTNAME,    \
+				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -359,18 +408,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( !actual )                                                                                         \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf(                                                                                       \
-			    stderr,                                                                                    \
-			    "\t\"%s\" file: %s line: %d Error: expected actual value to be true, but got false.\n",    \
-			    TESTNAME, __FILE__, __LINE__ );                                                            \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected actual value to be true, but got false.\n", \
+				 TESTNAME, __FILE__, __LINE__ );                                                       \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -383,18 +434,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( actual )                                                                                          \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf(                                                                                       \
-			    stderr,                                                                                    \
-			    "\t\"%s\" file: %s line: %d Error: expected actual value to be false, but got true.\n",    \
-			    TESTNAME, __FILE__, __LINE__ );                                                            \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected actual value to be false, but got true.\n", \
+				 TESTNAME, __FILE__, __LINE__ );                                                       \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -407,16 +460,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_ASSERT_EQ_SIZE( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( sizeof( expected ) != sizeof( actual ) )                                                          \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
-				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n", TESTNAME,     \
+				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                           \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -429,16 +486,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_ASSERT_NOTEQ_SIZE( TESTNAME, expected, actual )                                                           \
 	do                                                                                                             \
 	{                                                                                                              \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( sizeof( expected ) == sizeof( actual ) )                                                          \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
-				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n", TESTNAME,     \
+				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                           \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -451,16 +512,20 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_ASSERT_GE_SIZE( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( sizeof( expected ) > sizeof( actual ) )                                                           \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
-				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n", TESTNAME,     \
+				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                           \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -473,18 +538,41 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 #define NANO_ASSERT_LE_SIZE( TESTNAME, expected, actual )                                                              \
 	do                                                                                                             \
 	{                                                                                                              \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
 		if ( sizeof( expected ) < sizeof( actual ) )                                                           \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
-				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n", TESTNAME,     \
+				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                           \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
-			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
+
+/** 
+ * @brief Create test function with more information.
+ * @param FUNCTIONNAME Name of test function.
+ * @param CODEBLOCK Place a block of code that will run in the function.
+**/
+#define NANO_FUNCTION( FUNCTIONNAME, CODEBLOCK )                                                                       \
+	void FUNCTIONNAME( void )                                                                                      \
+	{                                                                                                              \
+		TOTAL_TEST_COUNTER_PER_FUNCTION = 0;                                                                   \
+		TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;                                                                 \
+		TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;                                                             \
+		fprintf( stderr, ">>> %s\n\n", #FUNCTIONNAME );                                                        \
+		CODEBLOCK;                                                                                             \
+		fprintf( stderr, "\r\nTESTS: (%u) | SUCCESSFUL: (%u) | FAILED: (%u)\r\n",                              \
+			 TOTAL_TEST_COUNTER_PER_FUNCTION, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION,                       \
+			 TOTAL_FAILED_COUNTER_PER_FUNCTION );                                                          \
+		fprintf( stderr, "<<<\n" );                                                                            \
+	}
 
 /** 
  * @brief The main function constructor.
@@ -494,7 +582,8 @@ static unsigned int TOTAL_FAILED_COUNTER = 0;
 	int main( void )                                                                                               \
 	{                                                                                                              \
 		CODEBLOCK;                                                                                             \
-		fprintf( stderr, "\r\nTOTAL SUCCESSFUL TESTS: (%u) | TOTAL FAILED TESTS: (%u)\r\n",                    \
-			 TOTAL_SUCCESSFUL_COUNTER, TOTAL_FAILED_COUNTER );                                             \
+		fprintf( stderr,                                                                                       \
+			 "\r\nTOTAL TESTS: (%u) | TOTAL SUCCESSFUL TESTS: (%u) | TOTAL FAILED TESTS: (%u)\r\n",        \
+			 TOTAL_TEST_COUNTER, TOTAL_SUCCESSFUL_COUNTER, TOTAL_FAILED_COUNTER );                         \
 		return 0;                                                                                              \
 	}
