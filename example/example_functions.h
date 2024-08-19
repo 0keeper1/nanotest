@@ -1,13 +1,13 @@
 #include "stdbool.h"
 
-int sum_int( int x, int y ) { return x + y; }
+static inline int sum_int( int x, int y ) { return x + y; }
 
-int *int_ptr( int *x ) { return x; }
+static inline int *int_ptr( int *x ) { return x; }
 
-float sum_float( float x, float y ) { return x + y; }
+static inline float sum_float( float x, float y ) { return x + y; }
 
-bool is_odd( int x ) { return ( x % 2 ) != 0; }
+static inline bool is_odd( int x ) { return ( x % 2 ) != 0; }
 
-bool is_n( char c ) { return c == 'n'; }
+static inline bool is_n( char c ) { return c == 'n'; }
 
-char next_char( char c ) { return ++c; }
+static inline char next_char( char c ) { return ++c; }
