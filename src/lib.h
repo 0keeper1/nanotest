@@ -16,6 +16,9 @@ enum T_TYPES
 
 #define Type( x ) _Generic( ( x ), _Bool: T_BOOL, float: T_FLOAT, char: T_CHAR, int: T_INT, default: UNKNOWN )
 
+static unsigned int TOTAL_SUCCESSFUL_COUNTER = 0;
+static unsigned int TOTAL_FAILED_COUNTER = 0;
+
 /**
  * @brief Runs one single test.
  * @param func The test function to be executed.
@@ -76,11 +79,13 @@ enum T_TYPES
 				"Actual and expected must be in int type" );                                           \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %d, got: %d.\n", TESTNAME,       \
 				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -98,11 +103,13 @@ enum T_TYPES
 				"Actual and expected must be in int type" );                                           \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be greater than %d.\n",     \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -120,11 +127,13 @@ enum T_TYPES
 				"Actual and expected must be in int type" );                                           \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %d to be less than %d.\n",        \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -142,11 +151,13 @@ enum T_TYPES
 				"Actual and expected must be in int type" );                                           \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %d not expected to be equal to %d .\n",    \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -164,11 +175,13 @@ enum T_TYPES
 				"Actual and expected must be in float type" );                                         \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f, got: %f.\n", TESTNAME,        \
 				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -186,11 +199,13 @@ enum T_TYPES
 				"Actual and expected must be in float type" );                                         \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %f, got: %f.\n", TESTNAME,       \
 				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -208,11 +223,13 @@ enum T_TYPES
 				"Actual and expected must be in float type" );                                         \
 		if ( expected > actual )                                                                               \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be greater than %f.\n",     \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -230,11 +247,13 @@ enum T_TYPES
 				"Actual and expected must be in float type" );                                         \
 		if ( expected < actual )                                                                               \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected %f to be less than %f.\n",        \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -252,11 +271,13 @@ enum T_TYPES
 				"Actual and expected must be in char type" );                                          \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
 				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -274,11 +295,13 @@ enum T_TYPES
 				"Actual and expected must be in char type" );                                          \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected '%c', got: '%c'.\n", TESTNAME,    \
 				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -294,11 +317,13 @@ enum T_TYPES
 	{                                                                                                              \
 		if ( expected != actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected: %p, got: %p.\n", TESTNAME,       \
 				 __FILE__, __LINE__, expected, actual );                                               \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -314,11 +339,13 @@ enum T_TYPES
 	{                                                                                                              \
 		if ( expected == actual )                                                                              \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: %p not expected to be equal to %p .\n",    \
 				 TESTNAME, __FILE__, __LINE__, expected, actual );                                     \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -334,6 +361,7 @@ enum T_TYPES
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
 		if ( !actual )                                                                                         \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf(                                                                                       \
 			    stderr,                                                                                    \
 			    "\t\"%s\" file: %s line: %d Error: expected actual value to be true, but got false.\n",    \
@@ -341,6 +369,7 @@ enum T_TYPES
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -356,6 +385,7 @@ enum T_TYPES
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
 		if ( actual )                                                                                          \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf(                                                                                       \
 			    stderr,                                                                                    \
 			    "\t\"%s\" file: %s line: %d Error: expected actual value to be false, but got true.\n",    \
@@ -363,6 +393,7 @@ enum T_TYPES
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -378,11 +409,13 @@ enum T_TYPES
 	{                                                                                                              \
 		if ( sizeof( expected ) != sizeof( actual ) )                                                          \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
 				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -398,11 +431,13 @@ enum T_TYPES
 	{                                                                                                              \
 		if ( sizeof( expected ) == sizeof( actual ) )                                                          \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
 				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -418,11 +453,13 @@ enum T_TYPES
 	{                                                                                                              \
 		if ( sizeof( expected ) > sizeof( actual ) )                                                           \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
 				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
@@ -438,11 +475,26 @@ enum T_TYPES
 	{                                                                                                              \
 		if ( sizeof( expected ) < sizeof( actual ) )                                                           \
 		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Error: expected size: %ld, got size: %ld.\n",     \
 				 TESTNAME, __FILE__, __LINE__, sizeof( expected ), sizeof( actual ) );                 \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			fprintf( stderr, "\t\"%s\" file: %s line: %d Ok.\n", TESTNAME, __FILE__, __LINE__ );           \
 		}                                                                                                      \
 	} while ( 0 )
+
+/** 
+ * @brief The main function constructor.
+ * @param CODEBLOCK Place a block of code that will run in the main function.
+**/
+#define NANO_MAIN( CODEBLOCK )                                                                                         \
+	int main( void )                                                                                               \
+	{                                                                                                              \
+		CODEBLOCK;                                                                                             \
+		fprintf( stderr, "\r\nTOTAL SUCCESSFUL TESTS: (%u) | TOTAL FAILED TESTS: (%u)\r\n",                    \
+			 TOTAL_SUCCESSFUL_COUNTER, TOTAL_FAILED_COUNTER );                                             \
+		return 0;                                                                                              \
+	}

@@ -18,11 +18,9 @@ void test_sum()
 	NANO_ASSERT_EQ_INT( "cmp x and y", x, y );
 }
 
-int main()
-{
+NANO_MAIN( {
 	NANO_SINGLE_TEST( test_sum );
-	return 0;
-}
+} )
 ```
 
 You can find a full example of the NaNotest usage example [here](./example/).

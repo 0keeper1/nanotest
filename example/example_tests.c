@@ -107,8 +107,7 @@ void test_size()
 
 void test_ignored() {}
 
-int main( void )
-{
+NANO_MAIN( {
 	// single test
 	NANO_SINGLE_TEST( test_is_n );
 
@@ -118,6 +117,4 @@ int main( void )
 
 	// ignored test
 	NANO_IGNORE_TEST( "Empty test must be ignored", test_ignored );
-
-	return 0;
-}
+} )
