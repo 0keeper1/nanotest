@@ -3,9 +3,7 @@
 #include <stdbool.h>
 
 NANO_FUNCTION( test_sum_int, {
-	int x;
-	int y;
-	int result;
+	int x, y, result;
 
 	x = 3;
 	y = 4;
@@ -34,9 +32,7 @@ NANO_FUNCTION( test_sum_int, {
 } )
 
 NANO_FUNCTION( test_sum_float, {
-	float x;
-	float y;
-	float result;
+	float x, y, result;
 
 	x = 3.1f;
 	y = 4.4f;
