@@ -16,9 +16,6 @@ enum T_TYPES
 
 #define Type( x ) _Generic( ( x ), _Bool: T_BOOL, float: T_FLOAT, char: T_CHAR, int: T_INT, default: UNKNOWN )
 
-static int TOTAL_SUCCSESFUL_COUNTER = 0;
-static int TOTAL_FAILURE_COUNTER = 0;
-
 /**
  * @brief Runs one single test.
  * @param func The test function to be executed.
@@ -337,10 +334,10 @@ static int TOTAL_FAILURE_COUNTER = 0;
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
 		if ( !actual )                                                                                         \
 		{                                                                                                      \
-			fprintf( stderr,                                                                               \
-				 "\t\"%s\" file: %s line: %d Error: expected actual value to be true, but "            \
-				 "got false.\n",                                                                       \
-				 TESTNAME, __FILE__, __LINE__ );                                                       \
+			fprintf(                                                                                       \
+			    stderr,                                                                                    \
+			    "\t\"%s\" file: %s line: %d Error: expected actual value to be true, but got false.\n",    \
+			    TESTNAME, __FILE__, __LINE__ );                                                            \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
@@ -359,10 +356,10 @@ static int TOTAL_FAILURE_COUNTER = 0;
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
 		if ( actual )                                                                                          \
 		{                                                                                                      \
-			fprintf( stderr,                                                                               \
-				 "\t\"%s\" file: %s line: %d Error: expected actual value to be false, but "           \
-				 "got true.\n",                                                                        \
-				 TESTNAME, __FILE__, __LINE__ );                                                       \
+			fprintf(                                                                                       \
+			    stderr,                                                                                    \
+			    "\t\"%s\" file: %s line: %d Error: expected actual value to be false, but got true.\n",    \
+			    TESTNAME, __FILE__, __LINE__ );                                                            \
 		}                                                                                                      \
 		else                                                                                                   \
 		{                                                                                                      \
