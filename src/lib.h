@@ -18,6 +18,7 @@ enum T_TYPES
 
 static unsigned int TOTAL_TEST_COUNTER = 0;
 static unsigned int TOTAL_FAILED_COUNTER = 0;
+static unsigned int TOTAL_IGNORED_COUNTER = 0;
 static unsigned int TOTAL_SUCCESSFUL_COUNTER = 0;
 static unsigned int TOTAL_TEST_COUNTER_PER_FUNCTION = 0;
 static unsigned int TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;
@@ -41,6 +42,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 #define NANO_IGNORE_TEST( REASON, func )                                                                               \
 	do                                                                                                             \
 	{                                                                                                              \
+		TOTAL_IGNORED_COUNTER++;                                                                               \
 		fprintf( stderr, "vvv %s\n\n", #func );                                                                \
 		fprintf( stderr, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__ );                          \
 		fprintf( stderr, "vvv\n" );                                                                            \
@@ -583,7 +585,8 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 	{                                                                                                              \
 		CODEBLOCK;                                                                                             \
 		fprintf( stderr,                                                                                       \
-			 "\r\nTOTAL TESTS: (%u) | TOTAL SUCCESSFUL TESTS: (%u) | TOTAL FAILED TESTS: (%u)\r\n",        \
-			 TOTAL_TEST_COUNTER, TOTAL_SUCCESSFUL_COUNTER, TOTAL_FAILED_COUNTER );                         \
+			 "\r\nTOTAL TESTS: (%u) | TOTAL SUCCESSFUL TESTS: (%u) | TOTAL FAILED TESTS: (%u) | TOTAL "    \
+			 "IGNORED TESTS: (%u)\r\n",                                                                    \
+			 TOTAL_TEST_COUNTER, TOTAL_SUCCESSFUL_COUNTER, TOTAL_FAILED_COUNTER, TOTAL_IGNORED_COUNTER );  \
 		return 0;                                                                                              \
 	}
