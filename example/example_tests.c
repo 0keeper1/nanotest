@@ -107,7 +107,7 @@ void test_size()
 
 void test_ignored() {}
 
-int main( void )
+int main(void)
 {
 	// single test
 	NANO_SINGLE_TEST( test_is_n );
