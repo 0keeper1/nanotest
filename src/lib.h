@@ -562,14 +562,14 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param FUNCTIONNAME Name of test function.
  * @param CODEBLOCK Place a block of code that will run in the function.
 **/
-#define NANO_FUNCTION( FUNCTIONNAME, CODEBLOCK )                                                                       \
+#define NANO_FUNCTION( FUNCTIONNAME, ... )                                                                             \
 	void FUNCTIONNAME( void )                                                                                      \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER_PER_FUNCTION = 0;                                                                   \
 		TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;                                                                 \
 		TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;                                                             \
 		fprintf( stderr, ">>> %s\n\n", #FUNCTIONNAME );                                                        \
-		CODEBLOCK;                                                                                             \
+		__VA_ARGS__;                                                                                           \
 		fprintf( stderr, "\r\nTESTS: (%u) | SUCCESSFUL: (%u) | FAILED: (%u)\r\n",                              \
 			 TOTAL_TEST_COUNTER_PER_FUNCTION, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION,                       \
 			 TOTAL_FAILED_COUNTER_PER_FUNCTION );                                                          \
@@ -580,10 +580,10 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @brief The main function constructor.
  * @param CODEBLOCK Place a block of code that will run in the main function.
 **/
-#define NANO_MAIN( CODEBLOCK )                                                                                         \
+#define NANO_MAIN( ... )                                                                                               \
 	int main( void )                                                                                               \
 	{                                                                                                              \
-		CODEBLOCK;                                                                                             \
+		__VA_ARGS__;                                                                                           \
 		fprintf( stderr,                                                                                       \
 			 "\r\nTOTAL TESTS: (%u) | TOTAL SUCCESSFUL TESTS: (%u) | TOTAL FAILED TESTS: (%u) | TOTAL "    \
 			 "IGNORED TESTS: (%u)\r\n",                                                                    \
