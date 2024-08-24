@@ -10,7 +10,7 @@ NANO_FUNCTION( test_sum_int, false, {
 
 	result = sum_int( x, y );
 
-	NANO_ASSERT_EQ_INT( "3 + 4 must be equal to 7", 6, result, false );
+	NANO_ASSERT_EQ_INT( "3 + 4 must be equal to 7", 7, result, false );
 
 	x = 100;
 	y = 200;
