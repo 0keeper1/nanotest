@@ -72,12 +72,12 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_EQ_INT( TESTNAME, expected, actual, required )                                                     \
+#define NANO_ASSERT_EQ_INT( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
@@ -88,7 +88,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %d, got: %d.\n%s", TESTNAME, __FILE__,     \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %d, got: %d.\n%s", TESTDESC, __FILE__,     \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -97,18 +97,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual integer is greater than given expected integer value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_GE_INT( TESTNAME, expected, actual, required )                                                     \
+#define NANO_ASSERT_GE_INT( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
@@ -119,7 +119,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -128,18 +128,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual integer is less than given expected integer value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_LE_INT( TESTNAME, expected, actual, required )                                                     \
+#define NANO_ASSERT_LE_INT( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
@@ -150,7 +150,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be less than %d.\n%s", TESTNAME,      \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be less than %d.\n%s", TESTDESC,      \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -159,18 +159,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual integer is not equal to given expected integer value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_NOTEQ_INT( TESTNAME, expected, actual, required )                                                  \
+#define NANO_ASSERT_NOTEQ_INT( TESTDESC, expected, actual, required )                                                  \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
@@ -181,7 +181,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: %d not expected to be equal to %d.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: %d not expected to be equal to %d.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -190,18 +190,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual float is equal to given expected float value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_EQ_FLOAT( TESTNAME, expected, actual, required )                                                   \
+#define NANO_ASSERT_EQ_FLOAT( TESTDESC, expected, actual, required )                                                   \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
@@ -212,7 +212,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f, got: %f.\n%s", TESTNAME, __FILE__,      \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f, got: %f.\n%s", TESTDESC, __FILE__,      \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -221,18 +221,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual float is not equal to given expected float value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_NOTEQ_FLOAT( TESTNAME, expected, actual, required )                                                \
+#define NANO_ASSERT_NOTEQ_FLOAT( TESTDESC, expected, actual, required )                                                \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
@@ -243,7 +243,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %f, got: %f.\n%s", TESTNAME, __FILE__,     \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %f, got: %f.\n%s", TESTDESC, __FILE__,     \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -252,18 +252,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual float is greater than given expected float value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_GE_FLOAT( TESTNAME, expected, actual, required )                                                   \
+#define NANO_ASSERT_GE_FLOAT( TESTDESC, expected, actual, required )                                                   \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
@@ -274,7 +274,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be greater than %f.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be greater than %f.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -283,18 +283,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual float is less than given expected float value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_LE_FLOAT( TESTNAME, expected, actual, required )                                                   \
+#define NANO_ASSERT_LE_FLOAT( TESTDESC, expected, actual, required )                                                   \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_FLOAT && Type( actual ) == T_FLOAT ),                          \
@@ -305,7 +305,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be less than %f.\n%s", TESTNAME,      \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be less than %f.\n%s", TESTDESC,      \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -314,18 +314,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual char is equal to given expected char value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_EQ_CHAR( TESTNAME, expected, actual, required )                                                    \
+#define NANO_ASSERT_EQ_CHAR( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ),                            \
@@ -336,7 +336,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTNAME, __FILE__,  \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTDESC, __FILE__,  \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -345,18 +345,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual char is not equal to given expected char value.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_NOTEQ_CHAR( TESTNAME, expected, actual, required )                                                 \
+#define NANO_ASSERT_NOTEQ_CHAR( TESTDESC, expected, actual, required )                                                 \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( expected ) == T_CHAR && Type( actual ) == T_CHAR ),                            \
@@ -367,7 +367,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTNAME, __FILE__,  \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTDESC, __FILE__,  \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -376,18 +376,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual pointer is equal to given expected pointer.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_EQ_PTR( TESTNAME, expected, actual, required )                                                     \
+#define NANO_ASSERT_EQ_PTR( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER++;                                                                                  \
@@ -396,7 +396,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %p, got: %p.\n%s", TESTNAME, __FILE__,     \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %p, got: %p.\n%s", TESTDESC, __FILE__,     \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -405,18 +405,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual pointer is not equal to given expected pointer.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_NOTEQ_PTR( TESTNAME, expected, actual, required )                                                  \
+#define NANO_ASSERT_NOTEQ_PTR( TESTDESC, expected, actual, required )                                                  \
 	do                                                                                                             \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER++;                                                                                  \
@@ -425,7 +425,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: %p not expected to be equal to %p.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: %p not expected to be equal to %p.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -434,17 +434,17 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual boolean is true.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_TRUE( TESTNAME, actual, required )                                                                 \
+#define NANO_ASSERT_TRUE( TESTDESC, actual, required )                                                                 \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
@@ -456,7 +456,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
 			fprintf( stderr,                                                                               \
 				 "- \t\"%s\" %s:%d Error: expected actual value to be true, but got false.\n%s",       \
-				 TESTNAME, __FILE__, __LINE__,                                                         \
+				 TESTDESC, __FILE__, __LINE__,                                                         \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
 		}                                                                                                      \
@@ -464,17 +464,17 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual boolean is false.
- * @param TESTNAME A human-readable name to identify the test..
+ * @param TESTDESC A human-readable description to explain the test..
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_FALSE( TESTNAME, actual, required )                                                                \
+#define NANO_ASSERT_FALSE( TESTDESC, actual, required )                                                                \
 	do                                                                                                             \
 	{                                                                                                              \
 		_Static_assert( ( Type( actual ) == T_BOOL ), "Actual must be in bool type" );                         \
@@ -486,7 +486,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
 			fprintf( stderr,                                                                               \
 				 "- \t\"%s\" %s:%d Error: expected actual value to be false, but got true.\n%s",       \
-				 TESTNAME, __FILE__, __LINE__,                                                         \
+				 TESTDESC, __FILE__, __LINE__,                                                         \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
 		}                                                                                                      \
@@ -494,18 +494,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual value size is equal to given expected value size.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_EQ_SIZE( TESTNAME, expected, actual, required )                                                    \
+#define NANO_ASSERT_EQ_SIZE( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER++;                                                                                  \
@@ -514,7 +514,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -523,18 +523,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual value size is not equal to given expected value size.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_NOTEQ_SIZE( TESTNAME, expected, actual, required )                                                 \
+#define NANO_ASSERT_NOTEQ_SIZE( TESTDESC, expected, actual, required )                                                 \
 	do                                                                                                             \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER++;                                                                                  \
@@ -543,7 +543,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -552,18 +552,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual value size is greater than given expected value size.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_GE_SIZE( TESTNAME, expected, actual, required )                                                    \
+#define NANO_ASSERT_GE_SIZE( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER++;                                                                                  \
@@ -572,7 +572,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -581,18 +581,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /**
  * @brief Checks if actual value size is less than given expected value size.
- * @param TESTNAME A human-readable name to identify the test.
+ * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value the we that we expect to receive.
  * @param actual   The value which we received.
  * @param required Indicates whether test proccess should panic if this test didn't passed.
 **/
-#define NANO_ASSERT_LE_SIZE( TESTNAME, expected, actual, required )                                                    \
+#define NANO_ASSERT_LE_SIZE( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER++;                                                                                  \
@@ -601,7 +601,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTNAME,   \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -610,23 +610,23 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTNAME, __FILE__, __LINE__ );                     \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
 /** 
  * @brief Create test function with more information.
- * @param FUNCTIONNAME Name of test function.
+ * @param FUNCNAME Name of test function.
  * @param required Indicates whether test proccess should panic if this function didn't passed. 
- * @param CODEBLOCK Place a block of code that will run in the function.
+ * @param ... Place a block of code that will run in the function.
 **/
-#define NANO_FUNCTION( FUNCTIONNAME, required, ... )                                                                   \
-	void FUNCTIONNAME( void )                                                                                      \
+#define NANO_FUNCTION( FUNCNAME, required, ... )                                                                       \
+	void FUNCNAME( void )                                                                                          \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER_PER_FUNCTION = 0;                                                                   \
 		TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;                                                                 \
 		TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;                                                             \
-		fprintf( stderr, ">>> %s\n\n", #FUNCTIONNAME );                                                        \
+		fprintf( stderr, ">>> %s\n\n", #FUNCNAME );                                                            \
 		__VA_ARGS__;                                                                                           \
 		fprintf( stderr, "\r\nTESTS: (%u) | SUCCESSFUL: (%u) | FAILED: (%u)\r\n",                              \
 			 TOTAL_TEST_COUNTER_PER_FUNCTION, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION,                       \
@@ -639,14 +639,14 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 				fprintf(                                                                               \
 				    stderr,                                                                            \
 				    "Test function %s is required and all it's assertions must pass to continue.\n",   \
-				    #FUNCTIONNAME );                                                                   \
+				    #FUNCNAME );                                                                       \
 			}                                                                                              \
 		}                                                                                                      \
 	}
 
 /** 
  * @brief The main function constructor.
- * @param CODEBLOCK Place a block of code that will run in the main function.
+ * @param ... Place a block of code that will run in the main function.
 **/
 #define NANO_MAIN( ... )                                                                                               \
 	int main( void )                                                                                               \
