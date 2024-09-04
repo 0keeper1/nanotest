@@ -29,6 +29,12 @@ NANO_FUNCTION( test_sum_int, false, {
 	result = sum_int( x, y );
 
 	NANO_ASSERT_GE_INT( "9 + 3 must be greater than 10", 10, result, false );
+
+	x = 9;
+	y = 3;
+	result = sum_int( x, y );
+
+	NANO_ASSERT_GTE_INT( "9 + 3 must be greater than or equal 12", 12, result, false );
 } )
 
 NANO_FUNCTION( test_sum_float, false, {

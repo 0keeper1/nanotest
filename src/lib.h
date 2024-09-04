@@ -115,12 +115,43 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 				"Actual and expected must be in int type" );                                           \
 		TOTAL_TEST_COUNTER++;                                                                                  \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
-		if ( expected > actual )                                                                               \
+		if ( expected > actual || expected == actual )                                                         \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
 			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
+				 required ? "This test is required and must pass to continue.\n" : "" );               \
+			assert( required == false );                                                                   \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual integer is greater than or equal given expected integer value.
+ * @param TESTDESC A human-readable description to explain the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+ * @param required Indicates whether test proccess should panic if this test didn't passed.
+**/
+#define NANO_ASSERT_GTE_INT( TESTDESC, expected, actual, required )                                                    \
+	do                                                                                                             \
+	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
+				"Actual and expected must be in int type" );                                           \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
+		if ( !( expected <= actual ) )                                                                         \
+		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be greater than or equal %d.\n%s",    \
+				 TESTDESC, __FILE__, __LINE__, expected, actual,                                       \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
 		}                                                                                                      \
@@ -146,12 +177,43 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 				"Actual and expected must be in int type" );                                           \
 		TOTAL_TEST_COUNTER++;                                                                                  \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
-		if ( expected < actual )                                                                               \
+		if ( expected < actual || expected == actual )                                                         \
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
 			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be less than %d.\n%s", TESTDESC,      \
 				 __FILE__, __LINE__, expected, actual,                                                 \
+				 required ? "This test is required and must pass to continue.\n" : "" );               \
+			assert( required == false );                                                                   \
+		}                                                                                                      \
+		else                                                                                                   \
+		{                                                                                                      \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
+			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+		}                                                                                                      \
+	} while ( 0 )
+
+/**
+ * @brief Checks if actual integer is less than or equal given expected integer value.
+ * @param TESTDESC A human-readable description to explain the test.
+ * @param expected The value the we that we expect to receive.
+ * @param actual   The value which we received.
+ * @param required Indicates whether test proccess should panic if this test didn't passed.
+**/
+#define NANO_ASSERT_LTE_INT( TESTDESC, expected, actual, required )                                                    \
+	do                                                                                                             \
+	{                                                                                                              \
+		_Static_assert( ( Type( expected ) == T_INT && Type( actual ) == T_INT ),                              \
+				"Actual and expected must be in int type" );                                           \
+		TOTAL_TEST_COUNTER++;                                                                                  \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                     \
+		if ( !( expected >= actual ) )                                                                         \
+		{                                                                                                      \
+			TOTAL_FAILED_COUNTER++;                                                                        \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
+			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be less than or equal %d.\n%s",       \
+				 TESTDESC, __FILE__, __LINE__, expected, actual,                                       \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
 		}                                                                                                      \
