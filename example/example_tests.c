@@ -18,11 +18,11 @@ NANO_FUNCTION( test_sum_int, false, {
 
 	NANO_ASSERT_NOTEQ_INT( "100 + 200 must not be 301", 301, result, false );
 
-	x = 8;
-	y = 1;
+	x = 9;
+	y = 3;
 	result = sum_int( x, y );
 
-	NANO_ASSERT_LE_INT( "9 + 3 must be less than 10", 10, result, false );
+	NANO_ASSERT_LE_INT( "9 + 3 must be less than 13", 13, result, false );
 
 	x = 9;
 	y = 3;
