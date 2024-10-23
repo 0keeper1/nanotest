@@ -1,9 +1,7 @@
 #pragma once
 
 #include <assert.h>
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 enum T_TYPES
@@ -73,9 +71,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_EQ_INT( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
@@ -104,9 +102,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual integer is greater than given expected integer value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_GE_INT( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
@@ -135,9 +133,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual integer is greater than or equal given expected integer value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_GTE_INT( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
@@ -166,9 +164,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual integer is less than given expected integer value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_LE_INT( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
@@ -197,9 +195,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual integer is less than or equal given expected integer value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_LTE_INT( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
@@ -228,9 +226,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual integer is not equal to given expected integer value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_NOTEQ_INT( TESTDESC, expected, actual, required )                                                  \
 	do                                                                                                             \
@@ -259,9 +257,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual float is equal to given expected float value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_EQ_FLOAT( TESTDESC, expected, actual, required )                                                   \
 	do                                                                                                             \
@@ -290,9 +288,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual float is not equal to given expected float value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_NOTEQ_FLOAT( TESTDESC, expected, actual, required )                                                \
 	do                                                                                                             \
@@ -321,9 +319,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual float is greater than given expected float value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_GE_FLOAT( TESTDESC, expected, actual, required )                                                   \
 	do                                                                                                             \
@@ -352,9 +350,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual float is less than given expected float value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_LE_FLOAT( TESTDESC, expected, actual, required )                                                   \
 	do                                                                                                             \
@@ -383,9 +381,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual char is equal to given expected char value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_EQ_CHAR( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
@@ -414,9 +412,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual char is not equal to given expected char value.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_NOTEQ_CHAR( TESTDESC, expected, actual, required )                                                 \
 	do                                                                                                             \
@@ -445,9 +443,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual pointer is equal to given expected pointer.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_EQ_PTR( TESTDESC, expected, actual, required )                                                     \
 	do                                                                                                             \
@@ -474,9 +472,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual pointer is not equal to given expected pointer.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_NOTEQ_PTR( TESTDESC, expected, actual, required )                                                  \
 	do                                                                                                             \
@@ -504,7 +502,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @brief Checks if actual boolean is true.
  * @param TESTDESC A human-readable description to explain the test.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_TRUE( TESTDESC, actual, required )                                                                 \
 	do                                                                                                             \
@@ -532,9 +530,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Checks if actual boolean is false.
- * @param TESTDESC A human-readable description to explain the test..
+ * @param TESTDESC A human-readable description to explain the test.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_FALSE( TESTDESC, actual, required )                                                                \
 	do                                                                                                             \
@@ -563,9 +561,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual value size is equal to given expected value size.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_EQ_SIZE( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
@@ -592,9 +590,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual value size is not equal to given expected value size.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_NOTEQ_SIZE( TESTDESC, expected, actual, required )                                                 \
 	do                                                                                                             \
@@ -621,9 +619,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual value size is greater than given expected value size.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_GE_SIZE( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
@@ -650,9 +648,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /**
  * @brief Checks if actual value size is less than given expected value size.
  * @param TESTDESC A human-readable description to explain the test.
- * @param expected The value the we that we expect to receive.
+ * @param expected The value we expect to receive.
  * @param actual   The value which we received.
- * @param required Indicates whether test proccess should panic if this test didn't passed.
+ * @param required Indicates whether test process should panic if this test didn't passed.
 **/
 #define NANO_ASSERT_LE_SIZE( TESTDESC, expected, actual, required )                                                    \
 	do                                                                                                             \
@@ -679,10 +677,11 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 /** 
  * @brief Create test function with more information.
  * @param FUNCNAME Name of test function.
- * @param required Indicates whether test proccess should panic if this function didn't passed. 
+ * @param required Indicates whether test process should panic if this function didn't passed. 
  * @param ... Place a block of code that will run in the function.
 **/
 #define NANO_FUNCTION( FUNCNAME, required, ... )                                                                       \
+	void FUNCNAME( void );\
 	void FUNCNAME( void )                                                                                          \
 	{                                                                                                              \
 		TOTAL_TEST_COUNTER_PER_FUNCTION = 0;                                                                   \

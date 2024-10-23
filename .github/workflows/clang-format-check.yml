@@ -9,8 +9,7 @@ jobs:
     strategy:
       matrix:
         path:
-          - 'src'
-          - 'example'
+          - 'include'
     steps:
     - uses: actions/checkout@v4
     - name: Run clang-format style check for C programs.

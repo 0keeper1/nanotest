@@ -1,6 +1,6 @@
 # NaNotest
 
-NaNotest is minimalistic testing library for C, focused to be lightweight and simple.
+NaNotest is minimalistic unit testing framework for C, focused to be lightweight and simple.
 
 # Examples
 
@@ -21,8 +21,6 @@ NANO_MAIN( {
 	NANO_SINGLE_TEST( test_sum );
 } )
 ```
-
-You can find a full example of the NaNotest usage example [here](./example/).
 
 # License
 
