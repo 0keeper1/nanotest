@@ -26,10 +26,10 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @brief Runs one single test.
  * @param func The test function to be executed.
 **/
-#define NANO_SINGLE_TEST( func, ... )                                                                                  \
+#define NANO_SINGLE_TEST( func )                                                                                  \
 	do                                                                                                             \
 	{                                                                                                              \
-		( func )( __VA_ARGS__ );                                                                               \
+		( func )();                                                                               \
 	} while ( 0 )
 
 /**
