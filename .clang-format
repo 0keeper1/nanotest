@@ -32,7 +32,7 @@ BreakConstructorInitializers: AfterColon
 BreakConstructorInitializersBeforeComma: false
 ColumnLimit: 120
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
-ContinuationIndentWidth: 8
+ContinuationIndentWidth: 0
 EmptyLineAfterAccessModifier: Always
 IncludeCategories: 
   - Regex: '^<.*'
