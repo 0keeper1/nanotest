@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-enum T_TYPES
-{
+enum T_TYPES {
 	T_BOOL,
 	T_INT,
 	T_CHAR,
@@ -42,9 +41,9 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 	do                                                                                                             \
 	{                                                                                                              \
 		TOTAL_IGNORED_COUNTER++;                                                                               \
-		fprintf( stderr, "vvv %s\n\n", #func );                                                                \
-		fprintf( stderr, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__ );                          \
-		fprintf( stderr, "vvv\n" );                                                                            \
+		fprintf( stdout, "vvv %s\n\n", #func );                                                                \
+		fprintf( stdout, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__ );                          \
+		fprintf( stdout, "vvv\n" );                                                                            \
 	} while ( 0 )
 
 /**
@@ -86,7 +85,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %d, got: %d.\n%s", TESTDESC, __FILE__,     \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected: %d, got: %d.\n%s", TESTDESC, __FILE__,     \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -95,7 +94,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -117,7 +116,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -126,7 +125,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -148,7 +147,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be greater than or equal %d.\n%s",    \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected %d to be greater than or equal %d.\n%s",    \
 				 TESTDESC, __FILE__, __LINE__, expected, actual,                                       \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -157,7 +156,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -179,7 +178,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be less than %d.\n%s", TESTDESC,      \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected %d to be less than %d.\n%s", TESTDESC,      \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -188,7 +187,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -210,7 +209,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %d to be less than or equal %d.\n%s",       \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected %d to be less than or equal %d.\n%s",       \
 				 TESTDESC, __FILE__, __LINE__, expected, actual,                                       \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -219,7 +218,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -241,7 +240,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: %d not expected to be equal to %d.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: %d not expected to be equal to %d.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -250,7 +249,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -272,7 +271,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f, got: %f.\n%s", TESTDESC, __FILE__,      \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected %f, got: %f.\n%s", TESTDESC, __FILE__,      \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -281,7 +280,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -303,7 +302,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %f, got: %f.\n%s", TESTDESC, __FILE__,     \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected: %f, got: %f.\n%s", TESTDESC, __FILE__,     \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -312,7 +311,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -334,7 +333,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be greater than %f.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected %f to be greater than %f.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -343,7 +342,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -365,7 +364,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected %f to be less than %f.\n%s", TESTDESC,      \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected %f to be less than %f.\n%s", TESTDESC,      \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -374,7 +373,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -396,7 +395,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTDESC, __FILE__,  \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTDESC, __FILE__,  \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -405,7 +404,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -427,7 +426,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTDESC, __FILE__,  \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected '%c', got: '%c'.\n%s", TESTDESC, __FILE__,  \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -436,7 +435,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -456,7 +455,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected: %p, got: %p.\n%s", TESTDESC, __FILE__,     \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected: %p, got: %p.\n%s", TESTDESC, __FILE__,     \
 				 __LINE__, expected, actual,                                                           \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -465,7 +464,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -485,7 +484,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: %p not expected to be equal to %p.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: %p not expected to be equal to %p.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, expected, actual,                                                 \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -494,7 +493,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -514,7 +513,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr,                                                                               \
+			fprintf( stdout,                                                                               \
 				 "- \t\"%s\" %s:%d Error: expected actual value to be true, but got false.\n%s",       \
 				 TESTDESC, __FILE__, __LINE__,                                                         \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
@@ -524,7 +523,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -544,7 +543,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr,                                                                               \
+			fprintf( stdout,                                                                               \
 				 "- \t\"%s\" %s:%d Error: expected actual value to be false, but got true.\n%s",       \
 				 TESTDESC, __FILE__, __LINE__,                                                         \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
@@ -554,7 +553,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -574,7 +573,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -583,7 +582,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -603,7 +602,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -612,7 +611,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -632,7 +631,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -641,7 +640,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -661,7 +660,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_FAILED_COUNTER++;                                                                        \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                           \
-			fprintf( stderr, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
+			fprintf( stdout, "- \t\"%s\" %s:%d Error: expected size: %ld, got size: %ld.\n%s", TESTDESC,   \
 				 __FILE__, __LINE__, sizeof( expected ), sizeof( actual ),                             \
 				 required ? "This test is required and must pass to continue.\n" : "" );               \
 			assert( required == false );                                                                   \
@@ -670,7 +669,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		{                                                                                                      \
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                    \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                       \
-			fprintf( stderr, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
+			fprintf( stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__ );                     \
 		}                                                                                                      \
 	} while ( 0 )
 
@@ -687,18 +686,18 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		TOTAL_TEST_COUNTER_PER_FUNCTION = 0;                                                                   \
 		TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;                                                                 \
 		TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;                                                             \
-		fprintf( stderr, ">>> %s\n\n", #FUNCNAME );                                                            \
+		fprintf( stdout, ">>> %s\n\n", #FUNCNAME );                                                            \
 		__VA_ARGS__;                                                                                           \
-		fprintf( stderr, "\r\nTESTS: (%u) | SUCCESSFUL: (%u) | FAILED: (%u)\r\n",                              \
+		fprintf( stdout, "\r\nTESTS: (%u) | SUCCESSFUL: (%u) | FAILED: (%u)\r\n",                              \
 			 TOTAL_TEST_COUNTER_PER_FUNCTION, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION,                       \
 			 TOTAL_FAILED_COUNTER_PER_FUNCTION );                                                          \
-		fprintf( stderr, "<<<\n" );                                                                            \
+		fprintf( stdout, "<<<\n" );                                                                            \
 		if ( required )                                                                                        \
 		{                                                                                                      \
 			if ( TOTAL_FAILED_COUNTER_PER_FUNCTION != 0 )                                                  \
 			{                                                                                              \
 				fprintf(                                                                               \
-				    stderr,                                                                            \
+				    stdout,                                                                            \
 				    "Test function %s is required and all it's assertions must pass to continue.\n",   \
 				    #FUNCNAME );                                                                       \
 			}                                                                                              \
@@ -713,7 +712,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 	int main( void )                                                                                               \
 	{                                                                                                              \
 		__VA_ARGS__;                                                                                           \
-		fprintf( stderr,                                                                                       \
+		fprintf( stdout,                                                                                       \
 			 "\r\nTOTAL TESTS: (%u) | TOTAL SUCCESSFUL TESTS: (%u) | TOTAL FAILED TESTS: (%u) | TOTAL "    \
 			 "IGNORED TESTS: (%u)\r\n",                                                                    \
 			 TOTAL_TEST_COUNTER, TOTAL_SUCCESSFUL_COUNTER, TOTAL_FAILED_COUNTER, TOTAL_IGNORED_COUNTER );  \
