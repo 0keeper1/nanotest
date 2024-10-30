@@ -32,13 +32,9 @@ enum T_TYPES {
 	unsigned c: T_UCHAR,                                                                                               \
 	default: UNKNOWN)
 
-static unsigned int TOTAL_TEST_COUNTER = 0;
-static unsigned int TOTAL_FAILED_COUNTER = 0;
-static unsigned int TOTAL_IGNORED_COUNTER = 0;
-static unsigned int TOTAL_SUCCESSFUL_COUNTER = 0;
-static unsigned int TOTAL_TEST_COUNTER_PER_FUNCTION = 0;
-static unsigned int TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;
-static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
+static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNORED_COUNTER = 0,
+TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0, TOTAL_FAILED_COUNTER_PER_FUNCTION = 0,
+TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
