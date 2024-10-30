@@ -7,12 +7,30 @@
 enum T_TYPES {
 	T_BOOL,
 	T_INT,
+	T_SHORT,
+	T_LONG,
+	T_UINT,
+	T_USHORT,
+	T_ULONG,
 	T_CHAR,
+	T_UCHAR,
 	T_FLOAT,
 	UNKNOWN,
 };
 
-#define Type(x) _Generic((x), _Bool: T_BOOL, float: T_FLOAT, char: T_CHAR, int: T_INT, default: UNKNOWN)
+#define Type(x)                                                                                                        \
+	_Generic((x),                                                                                                      \
+	_Bool: T_BOOL,                                                                                                     \
+	float: T_FLOAT,                                                                                                    \
+	char: T_CHAR,                                                                                                      \
+	int: T_INT,                                                                                                        \
+	short: T_SHORT,                                                                                                    \
+	long: T_LONG,                                                                                                      \
+	unsigned int: T_UINT,                                                                                              \
+	unsigned short: T_USHORT,                                                                                          \
+	unsigned long: T_ULONG,                                                                                            \
+	unsigned c: T_UCHAR,                                                                                               \
+	default: UNKNOWN)
 
 static unsigned int TOTAL_TEST_COUNTER = 0;
 static unsigned int TOTAL_FAILED_COUNTER = 0;
@@ -21,47 +39,6 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER = 0;
 static unsigned int TOTAL_TEST_COUNTER_PER_FUNCTION = 0;
 static unsigned int TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;
 static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
-
-/**
- * @brief Runs one single test.
- * @param func The test function to be executed.
- **/
-#define NANO_SINGLE_TEST(func)                                                                                         \
-	do {                                                                                                               \
-		(func)();                                                                                                      \
-	} while (0)
-
-/**
- * @brief Ignores one test with provided reason.
- * @param REASON Reason that we ignored the test.
- * @param func   Ignored test function.
- **/
-#define NANO_IGNORE_TEST(REASON, func)                                                                                 \
-	do {                                                                                                               \
-		TOTAL_IGNORED_COUNTER++;                                                                                       \
-		fprintf(stdout, "vvv %s\n\n", #func);                                                                          \
-		fprintf(stdout, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__);                                    \
-		fprintf(stdout, "vvv\n");                                                                                      \
-	} while (0)
-
-/**
- * @brief Runs a group of provided test in order.
- * @param GROUPTESTNAME A human-readable name to identify the group of tests.
- * @param ... Test functions to be called.
- **/
-#define NANO_GROUP_TEST(GROUPTESTNAME, ...)                                                                            \
-	do {                                                                                                               \
-		void (*funcs[])(void) = {__VA_ARGS__};                                                                         \
-		const char *fnames = #__VA_ARGS__;                                                                             \
-		size_t count = sizeof(funcs) / sizeof(funcs[0]);                                                               \
-		char fnamescp[strlen(fnames) + 1];                                                                             \
-		strncpy(fnamescp, fnames, sizeof(fnamescp));                                                                   \
-		char *fname = strtok(fnamescp, ", ");                                                                          \
-		for (size_t i = 0; i < count; ++i) {                                                                           \
-			(funcs[i])();                                                                                              \
-			fname = strtok(NULL, ", ");                                                                                \
-		}                                                                                                              \
-	} while (0)
 
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
@@ -564,6 +541,47 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                                \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                                   \
 			fprintf(stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__);                                   \
+		}                                                                                                              \
+	} while (0)
+
+/**
+ * @brief Runs one single test.
+ * @param func The test function to be executed.
+ **/
+#define NANO_SINGLE_TEST(func)                                                                                         \
+	do {                                                                                                               \
+		(func)();                                                                                                      \
+	} while (0)
+
+/**
+ * @brief Ignores one test with provided reason.
+ * @param REASON Reason that we ignored the test.
+ * @param func   Ignored test function.
+ **/
+#define NANO_IGNORE_TEST(REASON, func)                                                                                 \
+	do {                                                                                                               \
+		TOTAL_IGNORED_COUNTER++;                                                                                       \
+		fprintf(stdout, "vvv %s\n\n", #func);                                                                          \
+		fprintf(stdout, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__);                                    \
+		fprintf(stdout, "vvv\n");                                                                                      \
+	} while (0)
+
+/**
+ * @brief Runs a group of provided test in order.
+ * @param GROUPTESTNAME A human-readable name to identify the group of tests.
+ * @param ... Test functions to be called.
+ **/
+#define NANO_GROUP_TEST(GROUPTESTNAME, ...)                                                                            \
+	do {                                                                                                               \
+		void (*funcs[])(void) = {__VA_ARGS__};                                                                         \
+		const char *fnames = #__VA_ARGS__;                                                                             \
+		size_t count = sizeof(funcs) / sizeof(funcs[0]);                                                               \
+		char fnamescp[strlen(fnames) + 1];                                                                             \
+		strncpy(fnamescp, fnames, sizeof(fnamescp));                                                                   \
+		char *fname = strtok(fnamescp, ", ");                                                                          \
+		for (size_t i = 0; i < count; ++i) {                                                                           \
+			(funcs[i])();                                                                                              \
+			fname = strtok(NULL, ", ");                                                                                \
 		}                                                                                                              \
 	} while (0)
 
