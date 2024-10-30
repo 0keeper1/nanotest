@@ -23,7 +23,7 @@ shared_lib = shared_library(
     include_directories : header
 )
 
-declare_dependency(
+nanotest_dep = declare_dependency(
     link_with : static_lib,
     include_directories : header
 )
