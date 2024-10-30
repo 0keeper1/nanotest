@@ -24,6 +24,7 @@ shared_lib = shared_library(
 )
 
 declare_dependency(
+    link_with : static_lib,
     include_directories : header
 )
 
