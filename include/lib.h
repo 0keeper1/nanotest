@@ -584,12 +584,6 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 		fprintf(stdout, "\r\nTESTS: (%u) | SUCCESSFUL: (%u) | FAILED: (%u)\r\n", TOTAL_TEST_COUNTER_PER_FUNCTION,      \
 				TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION, TOTAL_FAILED_COUNTER_PER_FUNCTION);                             \
 		fprintf(stdout, "<<<\n");                                                                                      \
-		if (required) {                                                                                                \
-			if (TOTAL_FAILED_COUNTER_PER_FUNCTION != 0) {                                                              \
-				fprintf(stdout, "Test function %s is required and all it's assertions must pass to continue.\n",       \
-						#FUNCNAME);                                                                                    \
-			}                                                                                                          \
-		}                                                                                                              \
 	}
 
 /**
