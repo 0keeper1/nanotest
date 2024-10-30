@@ -170,7 +170,7 @@ TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_INT(TESTDESC, expected, actual, required)                                                    \
+#define NANO_ASSERT_NEQ_INT(TESTDESC, expected, actual, required)                                                    \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
@@ -221,7 +221,7 @@ TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_FLOAT(TESTDESC, expected, actual, required)                                                  \
+#define NANO_ASSERT_NEQ_FLOAT(TESTDESC, expected, actual, required)                                                  \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
@@ -325,7 +325,7 @@ TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_CHAR(TESTDESC, expected, actual, required)                                                   \
+#define NANO_ASSERT_NEQ_CHAR(TESTDESC, expected, actual, required)                                                   \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_CHAR && Type(actual) == T_CHAR),                                           \
 					   "Actual and expected must be in char type");                                                    \
@@ -375,7 +375,7 @@ TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_PTR(TESTDESC, expected, actual, required)                                                    \
+#define NANO_ASSERT_NEQ_PTR(TESTDESC, expected, actual, required)                                                    \
 	do {                                                                                                               \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -472,7 +472,7 @@ TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_SIZE(TESTDESC, expected, actual, required)                                                   \
+#define NANO_ASSERT_NEQ_SIZE(TESTDESC, expected, actual, required)                                                   \
 	do {                                                                                                               \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
