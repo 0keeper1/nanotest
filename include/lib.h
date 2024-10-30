@@ -33,8 +33,8 @@ enum T_TYPES {
 	default: UNKNOWN)
 
 static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNORED_COUNTER = 0,
-					TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0,
-					TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
+TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0,
+TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
@@ -73,7 +73,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNO
 		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
-		if (expected > actual || expected == actual) {                                                                 \
+		if (expected > actual) {                                                                 \
 			TOTAL_FAILED_COUNTER++;                                                                                    \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                                       \
 			fprintf(stdout, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n%s", TESTDESC, __FILE__,      \
