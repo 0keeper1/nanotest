@@ -7,61 +7,34 @@
 enum T_TYPES {
 	T_BOOL,
 	T_INT,
+	T_SHORT,
+	T_LONG,
+	T_UINT,
+	T_USHORT,
+	T_ULONG,
 	T_CHAR,
+	T_UCHAR,
 	T_FLOAT,
 	UNKNOWN,
 };
 
-#define Type(x) _Generic((x), _Bool: T_BOOL, float: T_FLOAT, char: T_CHAR, int: T_INT, default: UNKNOWN)
+#define Type(x)                                                                                                        \
+	_Generic((x),                                                                                                      \
+	_Bool: T_BOOL,                                                                                                     \
+	float: T_FLOAT,                                                                                                    \
+	char: T_CHAR,                                                                                                      \
+	int: T_INT,                                                                                                        \
+	short: T_SHORT,                                                                                                    \
+	long: T_LONG,                                                                                                      \
+	unsigned int: T_UINT,                                                                                              \
+	unsigned short: T_USHORT,                                                                                          \
+	unsigned long: T_ULONG,                                                                                            \
+	unsigned char: T_UCHAR,                                                                                            \
+	default: UNKNOWN)
 
-static unsigned int TOTAL_TEST_COUNTER = 0;
-static unsigned int TOTAL_FAILED_COUNTER = 0;
-static unsigned int TOTAL_IGNORED_COUNTER = 0;
-static unsigned int TOTAL_SUCCESSFUL_COUNTER = 0;
-static unsigned int TOTAL_TEST_COUNTER_PER_FUNCTION = 0;
-static unsigned int TOTAL_FAILED_COUNTER_PER_FUNCTION = 0;
-static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
-
-/**
- * @brief Runs one single test.
- * @param func The test function to be executed.
- **/
-#define NANO_SINGLE_TEST(func)                                                                                         \
-	do {                                                                                                               \
-		(func)();                                                                                                      \
-	} while (0)
-
-/**
- * @brief Ignores one test with provided reason.
- * @param REASON Reason that we ignored the test.
- * @param func   Ignored test function.
- **/
-#define NANO_IGNORE_TEST(REASON, func)                                                                                 \
-	do {                                                                                                               \
-		TOTAL_IGNORED_COUNTER++;                                                                                       \
-		fprintf(stdout, "vvv %s\n\n", #func);                                                                          \
-		fprintf(stdout, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__);                                    \
-		fprintf(stdout, "vvv\n");                                                                                      \
-	} while (0)
-
-/**
- * @brief Runs a group of provided test in order.
- * @param GROUPTESTNAME A human-readable name to identify the group of tests.
- * @param ... Test functions to be called.
- **/
-#define NANO_GROUP_TEST(GROUPTESTNAME, ...)                                                                            \
-	do {                                                                                                               \
-		void (*funcs[])(void) = {__VA_ARGS__};                                                                         \
-		const char *fnames = #__VA_ARGS__;                                                                             \
-		size_t count = sizeof(funcs) / sizeof(funcs[0]);                                                               \
-		char fnamescp[strlen(fnames) + 1];                                                                             \
-		strncpy(fnamescp, fnames, sizeof(fnamescp));                                                                   \
-		char *fname = strtok(fnamescp, ", ");                                                                          \
-		for (size_t i = 0; i < count; ++i) {                                                                           \
-			(funcs[i])();                                                                                              \
-			fname = strtok(NULL, ", ");                                                                                \
-		}                                                                                                              \
-	} while (0)
+static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNORED_COUNTER = 0,
+					TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0,
+					TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
@@ -95,7 +68,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_GE_INT(TESTDESC, expected, actual, required)                                                       \
+#define NANO_ASSERT_GR_INT(TESTDESC, expected, actual, required)                                                       \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
@@ -197,7 +170,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_INT(TESTDESC, expected, actual, required)                                                    \
+#define NANO_ASSERT_NEQ_INT(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
@@ -248,7 +221,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_FLOAT(TESTDESC, expected, actual, required)                                                  \
+#define NANO_ASSERT_NEQ_FLOAT(TESTDESC, expected, actual, required)                                                    \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
@@ -274,7 +247,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_GE_FLOAT(TESTDESC, expected, actual, required)                                                     \
+#define NANO_ASSERT_GR_FLOAT(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
@@ -352,7 +325,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_CHAR(TESTDESC, expected, actual, required)                                                   \
+#define NANO_ASSERT_NEQ_CHAR(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_CHAR && Type(actual) == T_CHAR),                                           \
 					   "Actual and expected must be in char type");                                                    \
@@ -402,7 +375,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_PTR(TESTDESC, expected, actual, required)                                                    \
+#define NANO_ASSERT_NEQ_PTR(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -499,7 +472,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_NOTEQ_SIZE(TESTDESC, expected, actual, required)                                                   \
+#define NANO_ASSERT_NEQ_SIZE(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -524,7 +497,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_GE_SIZE(TESTDESC, expected, actual, required)                                                      \
+#define NANO_ASSERT_GR_SIZE(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -564,6 +537,47 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 			TOTAL_SUCCESSFUL_COUNTER++;                                                                                \
 			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                                   \
 			fprintf(stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__);                                   \
+		}                                                                                                              \
+	} while (0)
+
+/**
+ * @brief Runs one single test.
+ * @param func The test function to be executed.
+ **/
+#define NANO_SINGLE_TEST(func)                                                                                         \
+	do {                                                                                                               \
+		(func)();                                                                                                      \
+	} while (0)
+
+/**
+ * @brief Ignores one test with provided reason.
+ * @param REASON Reason that we ignored the test.
+ * @param func   Ignored test function.
+ **/
+#define NANO_IGNORE_TEST(REASON, func)                                                                                 \
+	do {                                                                                                               \
+		TOTAL_IGNORED_COUNTER++;                                                                                       \
+		fprintf(stdout, "vvv %s\n\n", #func);                                                                          \
+		fprintf(stdout, "* \t\"%s\" %s:%d Ignored.\n", REASON, __FILE__, __LINE__);                                    \
+		fprintf(stdout, "vvv\n");                                                                                      \
+	} while (0)
+
+/**
+ * @brief Runs a group of provided test in order.
+ * @param GROUPTESTNAME A human-readable name to identify the group of tests.
+ * @param ... Test functions to be called.
+ **/
+#define NANO_GROUP_TEST(GROUPTESTNAME, ...)                                                                            \
+	do {                                                                                                               \
+		void (*funcs[])(void) = {__VA_ARGS__};                                                                         \
+		const char *fnames = #__VA_ARGS__;                                                                             \
+		size_t count = sizeof(funcs) / sizeof(funcs[0]);                                                               \
+		char fnamescp[strlen(fnames) + 1];                                                                             \
+		strncpy(fnamescp, fnames, sizeof(fnamescp));                                                                   \
+		char *fname = strtok(fnamescp, ", ");                                                                          \
+		for (size_t i = 0; i < count; ++i) {                                                                           \
+			(funcs[i])();                                                                                              \
+			fname = strtok(NULL, ", ");                                                                                \
 		}                                                                                                              \
 	} while (0)
 
