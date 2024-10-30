@@ -72,7 +72,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_GE_INT(TESTDESC, expected, actual, required)                                                       \
+#define NANO_ASSERT_GR_INT(TESTDESC, expected, actual, required)                                                       \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
@@ -251,7 +251,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_GE_FLOAT(TESTDESC, expected, actual, required)                                                     \
+#define NANO_ASSERT_GR_FLOAT(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
 		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
@@ -501,7 +501,7 @@ static unsigned int TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
  * @param actual   The value which we received.
  * @param required Indicates whether test process should panic if this test didn't passed.
  **/
-#define NANO_ASSERT_GE_SIZE(TESTDESC, expected, actual, required)                                                      \
+#define NANO_ASSERT_GR_SIZE(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
