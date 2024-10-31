@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-enum T_TYPES {
+enum TTypes {
 	T_BOOL,
 	T_INT,
 	T_SHORT,
@@ -18,7 +18,7 @@ enum T_TYPES {
 	UNKNOWN,
 };
 
-#define Type(x)                                                                                                        \
+#define TYPE(x)                                                                                                        \
 	_Generic((x),                                                                                                      \
 	_Bool: T_BOOL,                                                                                                     \
 	float: T_FLOAT,                                                                                                    \
@@ -33,8 +33,8 @@ enum T_TYPES {
 	default: UNKNOWN)
 
 static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNORED_COUNTER = 0,
-TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0,
-TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
+                    TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0,
+                    TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
@@ -45,7 +45,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_EQ_INT(TESTDESC, expected, actual, required)                                                       \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
+		_Static_assert((TYPE(expected) == T_INT && TYPE(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
 		if (expected != actual) {                                                                                      \
@@ -70,10 +70,10 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_GR_INT(TESTDESC, expected, actual, required)                                                       \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
+		_Static_assert((TYPE(expected) == T_INT && TYPE(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
-		if (expected > actual) {                                                                 \
+		if (expected > actual) {                                                                                       \
 			TOTAL_FAILED_COUNTER++;                                                                                    \
 			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                                       \
 			fprintf(stdout, "- \t\"%s\" %s:%d Error: expected %d to be greater than %d.\n%s", TESTDESC, __FILE__,      \
@@ -95,7 +95,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_GTE_INT(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
+		_Static_assert((TYPE(expected) == T_INT && TYPE(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
 		if (!(expected <= actual)) {                                                                                   \
@@ -121,7 +121,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_LE_INT(TESTDESC, expected, actual, required)                                                       \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
+		_Static_assert((TYPE(expected) == T_INT && TYPE(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
 		if (expected < actual || expected == actual) {                                                                 \
@@ -146,7 +146,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_LTE_INT(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
+		_Static_assert((TYPE(expected) == T_INT && TYPE(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
 		if (!(expected >= actual)) {                                                                                   \
@@ -172,7 +172,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_NEQ_INT(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_INT && Type(actual) == T_INT), "Actual and expected must be in int type"); \
+		_Static_assert((TYPE(expected) == T_INT && TYPE(actual) == T_INT), "Actual and expected must be in int type"); \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
 		if (expected == actual) {                                                                                      \
@@ -197,7 +197,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_EQ_FLOAT(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
+		_Static_assert((TYPE(expected) == T_FLOAT && TYPE(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -223,7 +223,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_NEQ_FLOAT(TESTDESC, expected, actual, required)                                                    \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
+		_Static_assert((TYPE(expected) == T_FLOAT && TYPE(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -249,7 +249,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_GR_FLOAT(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
+		_Static_assert((TYPE(expected) == T_FLOAT && TYPE(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -275,7 +275,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_LE_FLOAT(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_FLOAT && Type(actual) == T_FLOAT),                                         \
+		_Static_assert((TYPE(expected) == T_FLOAT && TYPE(actual) == T_FLOAT),                                         \
 					   "Actual and expected must be in float type");                                                   \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -301,7 +301,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_EQ_CHAR(TESTDESC, expected, actual, required)                                                      \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_CHAR && Type(actual) == T_CHAR),                                           \
+		_Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),                                           \
 					   "Actual and expected must be in char type");                                                    \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -327,7 +327,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_NEQ_CHAR(TESTDESC, expected, actual, required)                                                     \
 	do {                                                                                                               \
-		_Static_assert((Type(expected) == T_CHAR && Type(actual) == T_CHAR),                                           \
+		_Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),                                           \
 					   "Actual and expected must be in char type");                                                    \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
@@ -400,7 +400,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_TRUE(TESTDESC, actual, required)                                                                   \
 	do {                                                                                                               \
-		_Static_assert((Type(actual) == T_BOOL), "Actual must be in bool type");                                       \
+		_Static_assert((TYPE(actual) == T_BOOL), "Actual must be in bool type");                                       \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
 		if (!actual) {                                                                                                 \
@@ -424,7 +424,7 @@ TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0
  **/
 #define NANO_ASSERT_FALSE(TESTDESC, actual, required)                                                                  \
 	do {                                                                                                               \
-		_Static_assert((Type(actual) == T_BOOL), "Actual must be in bool type");                                       \
+		_Static_assert((TYPE(actual) == T_BOOL), "Actual must be in bool type");                                       \
 		TOTAL_TEST_COUNTER++;                                                                                          \
 		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
 		if (actual) {                                                                                                  \
