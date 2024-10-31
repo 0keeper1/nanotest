@@ -72,10 +72,10 @@
 
 ### CHAR MACROS
 
-- [ ] grater than aka GR
-- [ ] grater than equal aka GTE
-- [ ] less than aka LE
-- [ ] less than equal aka LTE
+- [x] grater than aka GR
+- [x] grater than equal aka GTE
+- [x] less than aka LE
+- [x] less than equal aka LTE
 - [x] equal aka EQ
 - [x] not equal aka NEQ
 

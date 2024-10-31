@@ -33,8 +33,8 @@ enum TTypes {
 	default: UNKNOWN)
 
 static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNORED_COUNTER = 0,
-                    TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0,
-                    TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
+					TOTAL_SUCCESSFUL_COUNTER = 0, TOTAL_TEST_COUNTER_PER_FUNCTION = 0,
+					TOTAL_FAILED_COUNTER_PER_FUNCTION = 0, TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION = 0;
 
 /**
  * @brief Checks if actual integer is equal to given expected integer value.
@@ -345,6 +345,114 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNO
 	} while (0)
 
 /**
+ * @brief Checks if actual char is grater than given expected char value.
+ * @param TESTDESC A human-readable description to explain the test.
+ * @param expected The value we expect to receive.
+ * @param actual   The value which we received.
+ * @param required Indicates whether test process should panic if this test didn't passed.
+ **/
+#define NANO_ASSERT_GR_CHAR(TESTDESC, expected, actual, required)                                                      \
+	do {                                                                                                               \
+		_Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),                                           \
+					   "Actual and expected must be in char type");                                                    \
+		TOTAL_TEST_COUNTER++;                                                                                          \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
+		if (expected > actual) {                                                                                       \
+			TOTAL_FAILED_COUNTER++;                                                                                    \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                                       \
+			fprintf(stdout, "- \t\"%s\" %s:%d Error: expected '%c' to be greater than '%c'.\n%s", TESTDESC, __FILE__,  \
+					__LINE__, expected, actual, required ? "This test is required and must pass to continue.\n" : ""); \
+			assert(required == false);                                                                                 \
+		} else {                                                                                                       \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                                \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                                   \
+			fprintf(stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__);                                   \
+		}                                                                                                              \
+	} while (0)
+
+/**
+ * @brief Checks if actual char is grater than or equal given expected char value.
+ * @param TESTDESC A human-readable description to explain the test.
+ * @param expected The value we expect to receive.
+ * @param actual   The value which we received.
+ * @param required Indicates whether test process should panic if this test didn't passed.
+ **/
+#define NANO_ASSERT_GTE_CHAR(TESTDESC, expected, actual, required)                                                     \
+	do {                                                                                                               \
+		_Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),                                           \
+					   "Actual and expected must be in char type");                                                    \
+		TOTAL_TEST_COUNTER++;                                                                                          \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
+		if (!(expected <= actual)) {                                                                                   \
+			TOTAL_FAILED_COUNTER++;                                                                                    \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                                       \
+			fprintf(stdout, "- \t\"%s\" %s:%d Error: expected '%c' to be greater than or equal '%c'.\n%s", TESTDESC,   \
+					__FILE__, __LINE__, expected, actual,                                                              \
+					required ? "This test is required and must pass to continue.\n" : "");                             \
+			assert(required == false);                                                                                 \
+		} else {                                                                                                       \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                                \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                                   \
+			fprintf(stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__);                                   \
+		}                                                                                                              \
+	} while (0)
+
+/**
+ * @brief Checks if actual char is less than given expected char value.
+ * @param TESTDESC A human-readable description to explain the test.
+ * @param expected The value we expect to receive.
+ * @param actual   The value which we received.
+ * @param required Indicates whether test process should panic if this test didn't passed.
+ **/
+#define NANO_ASSERT_LE_CHAR(TESTDESC, expected, actual, required)                                                      \
+	do {                                                                                                               \
+		_Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),                                           \
+					   "Actual and expected must be in char type");                                                    \
+		TOTAL_TEST_COUNTER++;                                                                                          \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
+		if (expected < actual || expected == actual)) {                                                                \
+				TOTAL_FAILED_COUNTER++;                                                                                \
+				TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                                   \
+				fprintf(stdout, "- \t\"%s\" %s:%d Error: expected '%c' to be less than '%c'.\n%s", TESTDESC, __FILE__, \
+						__LINE__, expected, actual,                                                                    \
+						required ? "This test is required and must pass to continue.\n" : "");                         \
+				assert(required == false);                                                                             \
+			}                                                                                                          \
+		else {                                                                                                         \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                                \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                                   \
+			fprintf(stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__);                                   \
+		}                                                                                                              \
+	} while (0)
+
+/**
+ * @brief Checks if actual char is less than or equal given expected char value.
+ * @param TESTDESC A human-readable description to explain the test.
+ * @param expected The value we expect to receive.
+ * @param actual   The value which we received.
+ * @param required Indicates whether test process should panic if this test didn't passed.
+ **/
+#define NANO_ASSERT_LTE_CHAR(TESTDESC, expected, actual, required)                                                     \
+	do {                                                                                                               \
+		_Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),                                           \
+					   "Actual and expected must be in char type");                                                    \
+		TOTAL_TEST_COUNTER++;                                                                                          \
+		TOTAL_TEST_COUNTER_PER_FUNCTION++;                                                                             \
+		if (!(expected >= actual)) {                                                                                   \
+			TOTAL_FAILED_COUNTER++;                                                                                    \
+			TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                                                       \
+			fprintf(stdout, "- \t\"%s\" %s:%d Error: expected '%c' to be less than or equal '%c'.\n%s", TESTDESC,      \
+					__FILE__, __LINE__, expected, actual,                                                              \
+					required ? "This test is required and must pass to continue.\n" : "");                             \
+			assert(required == false);                                                                                 \
+		} else {                                                                                                       \
+			TOTAL_SUCCESSFUL_COUNTER++;                                                                                \
+			TOTAL_SUCCESSFUL_COUNTER_PER_FUNCTION++;                                                                   \
+			fprintf(stdout, "+ \t\"%s\" %s:%d Ok.\n", TESTDESC, __FILE__, __LINE__);                                   \
+		}                                                                                                              \
+	} while (0)
+
+/**
  * @brief Checks if actual pointer is equal to given expected pointer.
  * @param TESTDESC A human-readable description to explain the test.
  * @param expected The value we expect to receive.
@@ -587,7 +695,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0, TOTAL_IGNO
  * @param required Indicates whether test process should panic if this function didn't passed.
  * @param ... Place a block of code that will run in the function.
  **/
-#define NANO_FUNCTION(FUNCNAME, required, ...)                                                                         \
+#define NANO_FUNCTION(FUNCNAME, ...)                                                                                   \
 	void FUNCNAME(void);                                                                                               \
 	void FUNCNAME(void) {                                                                                              \
 		TOTAL_TEST_COUNTER_PER_FUNCTION = 0;                                                                           \
