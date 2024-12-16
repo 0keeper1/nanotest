@@ -1,7 +1,7 @@
 project(
     'unstdtest',
     'c',
-    version : '1.1.2',
+    version : '1.2.2',
     license : 'MIT',
     default_options : ['warning_level=3', 'c_std=gnu23']
 )
@@ -31,7 +31,7 @@ install_headers(header_file)
 
 pkg_config.generate(
     filebase : 'unstdtest',
-    version : '1.1.2',
+    version : meson.project_version(),
     name : 'unstdtest',
     description : ' unstdtest is a minimalistic testing framework for C focused on being lightweight and simple',
 )
