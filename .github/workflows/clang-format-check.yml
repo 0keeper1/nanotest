@@ -1,6 +1,6 @@
 name: clang-format Check
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 jobs:
 
   formatting-check:
@@ -11,9 +11,9 @@ jobs:
         path:
           - 'include'
     steps:
-    - uses: actions/checkout@v4
-    - name: Run clang-format style check for C programs.
-      uses: jidicula/clang-format-action@v4.13.0
-      with:
-        clang-format-version: '18'
-        check-path: ${{ matrix.path }}
+      - uses: actions/checkout@v4
+      - name: Run clang-format style check for C programs.
+        uses: jidicula/clang-format-action@v4.13.0
+        with:
+          clang-format-version: '18'
+          check-path: ${{ matrix.path }}
