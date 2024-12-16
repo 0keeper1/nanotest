@@ -479,7 +479,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
                    "Actual and expected must be in char type");                \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
-    if (expected < actual || expected == actual)) {                \
+    if (expected < actual || expected == actual)) {                            \
         TOTAL_FAILED_COUNTER++;                                                \
         TOTAL_FAILED_COUNTER_PER_FUNCTION++;                                   \
         fprintf(                                                               \
