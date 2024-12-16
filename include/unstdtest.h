@@ -355,7 +355,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
 #define ASSERT_EQ_CHAR(TESTDESC, expected, actual, required)                   \
   do {                                                                         \
     _Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),       \
-                   "Actual and expected must be in char type");                \
+                   "Both expected and actual must be of type char");                \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (expected != actual) {                                                  \
@@ -384,7 +384,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
 #define ASSERT_NEQ_CHAR(TESTDESC, expected, actual, required)                  \
   do {                                                                         \
     _Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),       \
-                   "Actual and expected must be in char type");                \
+                   "Both expected and actual must be of type char");                \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (expected == actual) {                                                  \
@@ -413,7 +413,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
 #define ASSERT_GR_CHAR(TESTDESC, expected, actual, required)                   \
   do {                                                                         \
     _Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),       \
-                   "Actual and expected must be in char type");                \
+                   "Both expected and actual must be of type char");                \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (expected > actual) {                                                   \
@@ -445,7 +445,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
 #define ASSERT_GTE_CHAR(TESTDESC, expected, actual, required)                  \
   do {                                                                         \
     _Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),       \
-                   "Actual and expected must be in char type");                \
+                   "Both expected and actual must be of type char");                \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (!(expected <= actual)) {                                               \
@@ -476,7 +476,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
 #define ASSERT_LE_CHAR(TESTDESC, expected, actual, required)                   \
   do {                                                                         \
     _Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),       \
-                   "Actual and expected must be in char type");                \
+                   "Both expected and actual must be of type char");                \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (expected < actual || expected == actual)) {                            \
@@ -508,7 +508,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
 #define ASSERT_LTE_CHAR(TESTDESC, expected, actual, required)                  \
   do {                                                                         \
     _Static_assert((TYPE(expected) == T_CHAR && TYPE(actual) == T_CHAR),       \
-                   "Actual and expected must be in char type");                \
+                   "Both expected and actual must be of type char");                \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (!(expected >= actual)) {                                               \
@@ -594,7 +594,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
  */
 #define ASSERT_TRUE(TESTDESC, actual, required)                                \
   do {                                                                         \
-    _Static_assert((TYPE(actual) == T_BOOL), "Actual must be in bool type");   \
+    _Static_assert((TYPE(actual) == T_BOOL), "Actual must be of type char");   \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (!actual) {                                                             \
@@ -624,7 +624,7 @@ static unsigned int TOTAL_TEST_COUNTER = 0, TOTAL_FAILED_COUNTER = 0,
  */
 #define ASSERT_FALSE(TESTDESC, actual, required)                               \
   do {                                                                         \
-    _Static_assert((TYPE(actual) == T_BOOL), "Actual must be in bool type");   \
+    _Static_assert((TYPE(actual) == T_BOOL), "Actual must be of type char");   \
     TOTAL_TEST_COUNTER++;                                                      \
     TOTAL_TEST_COUNTER_PER_FUNCTION++;                                         \
     if (actual) {                                                              \
