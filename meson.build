@@ -1,33 +1,37 @@
 project(
-    'nanotest',
+    'unstdtest',
     'c',
     version : '1.1.2',
-    default_options : ['warning_level=3', 'c_std=c2x']
+    license : 'MIT',
+    default_options : ['warning_level=3', 'c_std=gnu23']
 )
 
-header = include_directories('include')
+pkg_config = import('pkgconfig')
 
-static_lib = static_library(
-    meson.project_name() + '_static',
-    ['src/main.c'],
-    gnu_symbol_visibility : 'hidden',
-    install : false,
-    include_directories : header
+lib_args = ['-DBUILDING_MESON_LIBRARY']
+
+headers = include_directories('include')
+
+header_file = files('include/unstdtest.h')
+
+libunstdtest_lib = static_library(
+    'lib' + meson.project_name(),
+    include_directories : headers,
+    sources : [],
+    c_args : lib_args,
+    install : true
 )
 
-shared_lib = shared_library(
-    meson.project_name(),
-    ['src/main.c'],
-    gnu_symbol_visibility : 'hidden',
-    install : true,
-    include_directories : header
+libunstdtest_dep = declare_dependency(
+    include_directories : headers,
+    link_with : libunstdtest_lib
 )
 
-nanotest_dep = declare_dependency(
-    link_with : static_lib,
-    include_directories : header
+install_headers(header_file)
+
+pkg_config.generate(
+    filebase : 'unstdtest',
+    version : '1.1.2',
+    name : 'unstdtest',
+    description : ' unstdtest is a minimalistic testing framework for C focused on being lightweight and simple',
 )
-
-install_headers('include/lib.h', subdir : meson.project_name())
-
-

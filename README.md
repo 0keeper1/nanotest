@@ -1,6 +1,6 @@
-# NaNotest
+# unstdtest
 
-NaNotest is minimalistic unit testing framework for C, focused to be lightweight and simple.
+unstdtest is minimalistic unit testing framework for C, focused to be lightweight and simple.
 
 # Examples
 
