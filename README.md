@@ -7,18 +7,18 @@ unstdtest is minimalistic unit testing framework for C, focused to be lightweigh
 - Single test example
 
 ```c
-NANO_FUNCTION( test_sum, false, {
+FUNCTION( test_sum, false, {
 	int x;
 	int y;
 
 	x = sum(3, 4);
 	y = sum(5, 2);
 	
-	NANO_ASSERT_EQ_INT( "cmp x and y", x, y, false );
+	ASSERT_EQ_INT( "cmp x and y", x, y, false );
 })
 
-NANO_MAIN( {
-	NANO_SINGLE_TEST( test_sum );
+MAIN( {
+	SINGLE_TEST( test_sum );
 } )
 ```
 
