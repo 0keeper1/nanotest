@@ -14,7 +14,7 @@ headers = include_directories('include')
 
 header_file = files('include/unstdtest.h')
 
-libunstdtest_lib = static_library(
+unstdtest_lib = static_library(
     'lib' + meson.project_name(),
     include_directories : headers,
     sources : [],
@@ -22,9 +22,9 @@ libunstdtest_lib = static_library(
     install : true
 )
 
-libunstdtest_dep = declare_dependency(
+unstdtest_dep = declare_dependency(
     include_directories : headers,
-    link_with : libunstdtest_lib
+    link_with : unstdtest_lib
 )
 
 install_headers(header_file)
